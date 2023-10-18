@@ -4,14 +4,17 @@
 	import CloseIcon from '../assets/close.svelte';
 	import { page } from '$app/stores';
 	import Button from '../components/Button.svelte';
+	import { goto } from '$app/navigation';
 
-	const location = $page.url.pathname;
+	const handleClickButton = () => {
+		goto('/add-reservation');
+	};
 </script>
 
 <header>
 	<div class="right-btn-wrapper">
-		{#if location === '/'}
-			<Button text={'New Reservation'} />
+		{#if $page.url.pathname === '/'}
+			<Button text={'New Reservation'} onClick={handleClickButton} />
 		{/if}
 	</div>
 

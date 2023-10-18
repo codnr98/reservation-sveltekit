@@ -2,9 +2,10 @@
 	import AddIcon from '../assets/add.svelte';
 
 	export let text: string;
+	export let onClick: () => void;
 </script>
 
-<button class="reservation-button"
+<button class="reservation-button" on:click={onClick}
 	><AddIcon />
 	<p>{text}</p></button
 >
