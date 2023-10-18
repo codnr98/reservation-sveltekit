@@ -1,21 +1,23 @@
 <script>
 	import '../lib/styles/reset.css';
 	import '../lib/styles/theme.css';
-	import AddIcon from '../assets/add.svelte';
 	import CloseIcon from '../assets/close.svelte';
+	import { page } from '$app/stores';
+	import Button from '../components/Button.svelte';
+
+	const location = $page.url.pathname;
 </script>
 
 <header>
-	<div class="button-wrapper">
-		<button class="reservation-button"
-			><AddIcon />
-			<p>New Reservation</p></button
-		>
+	<div class="right-btn-wrapper">
+		{#if location === '/'}
+			<Button text={'New Reservation'} />
+		{/if}
 	</div>
 
 	<h1>Reservation</h1>
 
-	<div class="close-btn-wrapper">
+	<div class="left-btn-wrapper">
 		<button class="close-btn">
 			<CloseIcon />
 		</button>
@@ -33,6 +35,10 @@
 		justify-content: space-between;
 	}
 
+	.right-btn-wrapper {
+		flex: 1 1 0%;
+	}
+
 	h1 {
 		font-size: 24px;
 		color: var(--black300);
@@ -41,27 +47,8 @@
 		flex: 3 1 0%;
 	}
 
-	.button-wrapper {
-		flex: 1 1 0%;
-	}
-
-	.reservation-button {
-		display: flex;
-		align-items: center;
-		gap: 5px;
-		padding: 12px 18px;
-		border-radius: 8px;
-		color: var(--orange500);
-		background-color: var(--background-primary2);
-		box-shadow: var(--shadow);
-	}
-
-	.close-btn-wrapper {
+	.left-btn-wrapper {
 		flex: 1 1 0%;
 		text-align: right;
-	}
-
-	p {
-		font-size: 17px;
 	}
 </style>
