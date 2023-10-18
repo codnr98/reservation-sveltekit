@@ -1,0 +1,22 @@
+:root {
+	--orange200: #f1a68c;
+	--orange400: #fa8252;
+	--orange500: #ec541f;
+	--orange700: #e04e1a;
+
+	--black50: #d0cfcf;
+	--black100: #d0cfcf;
+	--black200: #a0a09f;
+	--black300: #717070;
+	--black400: #414140;
+	--black500: #121110;
+	--black600: #0e0e0d;
+	--black700: #0b0a0a;
+
+	--background-primary: #ffffff;
+	--background-primary2: #fbfbfb;
+	--background-primary3: #d5d3d1;
+	--background-secondary: #f5f5f4;
+
+	--line-normal: #d6d4d2;
+}
