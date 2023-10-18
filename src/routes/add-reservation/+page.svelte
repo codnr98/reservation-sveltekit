@@ -27,13 +27,21 @@
 	input {
 		border: 1px solid var(--line-normal);
 		padding: 22px 22px;
+		border-radius: 12px;
 	}
 
 	.first {
-		display: flex;
-		justify-content: space-between;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		align-items: center;
+		gap: 20px;
 	}
+
 	.first > * {
-		width: 33%;
+		width: 100%;
+	}
+
+	.button-wrapper {
+		height: 90%;
 	}
 </style>
