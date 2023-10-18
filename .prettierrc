@@ -5,5 +5,16 @@
 	"printWidth": 100,
 	"plugins": ["prettier-plugin-svelte"],
 	"pluginSearchDirs": ["."],
-	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
+	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
+	"svelteBracketNewLine": true,
+	"svelteStrictMode": false,
+	"tabWidth": 2,
+	"arrowParens": "avoid",
+	"semi": true,
+	"quoteProps": "as-needed",
+	"jsxSingleQuote": true,
+	"bracketSpacing": true,
+	"bracketSameLine": false,
+	"singleAttributePerLine": false,
+	"endOfLine": "auto"
 }
