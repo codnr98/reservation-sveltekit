@@ -14,11 +14,18 @@
 <header>
 	<div class="right-btn-wrapper">
 		{#if $page.url.pathname === '/'}
-			<Button text={'New Reservation'} onClick={handleClickButton} />
+			<Button icon={'add'} text={'New Reservation'} onClick={handleClickButton} />
+		{/if}
+		{#if $page.url.pathname === '/add-reservation'}
+			<Button icon={'arrow-left'} text={''} onClick={handleClickButton} />
 		{/if}
 	</div>
 
-	<h1>Reservation</h1>
+	{#if $page.url.pathname === '/'}
+		<h1>Reservation</h1>
+	{:else}
+		<h1>New Reservation</h1>
+	{/if}
 
 	<div class="left-btn-wrapper">
 		<button class="close-btn">
