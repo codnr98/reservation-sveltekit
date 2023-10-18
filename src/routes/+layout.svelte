@@ -6,18 +6,22 @@
 	import Button from '../components/Button.svelte';
 	import { goto } from '$app/navigation';
 
-	const handleClickButton = () => {
+	const handleClickAddButton = () => {
 		goto('/add-reservation');
+	};
+	const handleClickPreviousButton = () => {
+		goto('/..');
 	};
 </script>
 
 <header>
 	<div class="right-btn-wrapper">
 		{#if $page.url.pathname === '/'}
-			<Button icon={'add'} text={'New Reservation'} onClick={handleClickButton} />
+			<Button icon={'add'} text={'New Reservation'} onClick={handleClickAddButton} />
 		{/if}
+
 		{#if $page.url.pathname === '/add-reservation'}
-			<Button icon={'arrow-left'} text={''} onClick={handleClickButton} />
+			<Button icon={'arrow-left'} text={''} onClick={handleClickPreviousButton} />
 		{/if}
 	</div>
 
