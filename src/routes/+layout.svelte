@@ -17,11 +17,21 @@
 <header>
 	<div class="right-btn-wrapper">
 		{#if $page.url.pathname === '/'}
-			<Button icon={'add'} text={'New Reservation'} onClick={handleClickAddButton} />
+			<Button
+				sizeAlign={'inner'}
+				icon={'add'}
+				text={'New Reservation'}
+				onClick={handleClickAddButton}
+			/>
 		{/if}
 
 		{#if $page.url.pathname === '/add-reservation'}
-			<Button icon={'arrow-left'} text={''} onClick={handleClickPreviousButton} />
+			<Button
+				sizeAlign={'inner'}
+				icon={'arrow-left'}
+				text={''}
+				onClick={handleClickPreviousButton}
+			/>
 		{/if}
 	</div>
 
