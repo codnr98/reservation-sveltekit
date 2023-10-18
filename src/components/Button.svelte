@@ -1,8 +1,9 @@
 <script lang="ts">
 	import AddIcon from '../assets/add.svelte';
 	import ArrowLeftIcon from '../assets/keyboard_backspace.svelte';
+	import CalendarIcon from '../assets/today.svelte';
 	export let text: string;
-	export let icon: 'arrow-left' | 'add';
+	export let icon: 'arrow-left' | 'add' | 'calendar';
 	export let onClick: () => void;
 </script>
 
@@ -10,9 +11,11 @@
 	>{#if icon === 'arrow-left'}
 		<ArrowLeftIcon />
 	{/if}
-
 	{#if icon === 'add'}
 		<AddIcon />
+	{/if}
+	{#if icon === 'calendar'}
+		<CalendarIcon />
 	{/if}
 	<p>{text}</p></button
 >
@@ -31,6 +34,7 @@
 
 	.icon-button {
 		padding: 4px 4px;
+		color: var(--black300);
 	}
 
 	p {
