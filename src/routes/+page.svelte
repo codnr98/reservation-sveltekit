@@ -1,10 +1,13 @@
 <script>
+	import AddIcon from '../assets/add.svelte';
 </script>
 
 <header>
 	<button class="reservation-button">reservation</button>
 	<h1>Reservation</h1>
-	<button>x</button>
+	<button>
+		<AddIcon />
+	</button>
 </header>
 
 <style>
