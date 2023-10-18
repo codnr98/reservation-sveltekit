@@ -1,7 +1,7 @@
 :root {
 	--orange200: #f1a68c;
 	--orange400: #fa8252;
-	--orange500: #ec541f;
+	--orange500: #ec551f;
 	--orange700: #e04e1a;
 
 	--black50: #d0cfcf;
@@ -19,4 +19,6 @@
 	--background-secondary: #f5f5f4;
 
 	--line-normal: #d6d4d2;
+
+	--shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 }
