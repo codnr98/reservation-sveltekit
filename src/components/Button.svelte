@@ -19,6 +19,7 @@
 		color: var(--orange500);
 		background-color: var(--background-primary2);
 		box-shadow: var(--shadow);
+		cursor: pointer;
 	}
 
 	p {

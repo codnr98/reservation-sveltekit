@@ -30,7 +30,7 @@
 	header {
 		display: flex;
 		align-items: center;
-		padding: 5px 10px;
+		padding: 15px 15px;
 		background-color: var(--background-primary);
 		justify-content: space-between;
 	}
