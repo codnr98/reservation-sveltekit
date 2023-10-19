@@ -1,5 +1,20 @@
 <script>
 	import Card from '../components/Card.svelte';
+	import { reservationList } from '../stores/reservationStore';
+
+	const mockData = {
+		name: 'Lee',
+		phoneNum: '010-123-1234',
+		date: new Date(),
+		guest: 2,
+		table: {
+			number: 8,
+			floor: 1
+		},
+		note: '많이 주세요'
+	};
+	reservationList.update(list => [...list, mockData]);
+	console.log($reservationList);
 </script>
 
 <div>
