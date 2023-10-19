@@ -98,7 +98,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 10px;
+		justify-content: space-between;
+		height: 100px;
 	}
 	.dial-wrapper > p {
 		font-size: 26px;
