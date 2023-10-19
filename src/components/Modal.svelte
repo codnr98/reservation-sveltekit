@@ -1,10 +1,8 @@
 <script lang="ts">
 	import CalendarIcon from '../assets/today.svelte';
 	import AlarmIcon from '../assets/alarm_on.svelte';
-	import ChevronDownIcon from '../assets/chevron-down.svelte';
 	import ChevronUpIcon from '../assets/chevron-up.svelte';
-	import ChevronUp from '../assets/chevron-up.svelte';
-	import ChevronDown from '../assets/chevron-down.svelte';
+	import ChevronDownIcon from '../assets/chevron-down.svelte';
 	import Button from './Button.svelte';
 
 	export let closeModal: () => void;
@@ -21,21 +19,21 @@
 
 		<div class="dial">
 			<div class="dial-wrapper">
-				<ChevronUp />
+				<ChevronUpIcon />
 				<p>00</p>
-				<ChevronDown />
+				<ChevronDownIcon />
 			</div>
 			<p>:</p>
 			<div class="dial-wrapper">
-				<ChevronUp />
+				<ChevronUpIcon />
 				<p>00</p>
-				<ChevronDown />
+				<ChevronDownIcon />
 			</div>
 			<p />
 			<div class="dial-wrapper">
-				<ChevronUp />
+				<ChevronUpIcon />
 				<p>PM</p>
-				<ChevronDown />
+				<ChevronDownIcon />
 			</div>
 		</div>
 
