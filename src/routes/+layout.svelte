@@ -18,7 +18,7 @@
 	<div class="right-btn-wrapper">
 		{#if $page.url.pathname === '/'}
 			<Button
-				color={'normal'}
+				color={'text-orange'}
 				sizeAlign={'inner'}
 				icon={'add'}
 				text={'New Reservation'}
@@ -59,6 +59,7 @@
 		padding: 15px 15px;
 		background-color: var(--background-primary);
 		justify-content: space-between;
+		height: 80px;
 	}
 
 	.right-btn-wrapper {
