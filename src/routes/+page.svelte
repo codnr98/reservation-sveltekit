@@ -3,6 +3,7 @@
 	import { reservationList } from '../stores/reservationStore';
 
 	const mockData = {
+		id: '1',
 		name: 'Lee',
 		phoneNum: '010-123-1234',
 		date: new Date(),
@@ -13,19 +14,19 @@
 		},
 		note: '많이 주세요'
 	};
+
 	reservationList.update(list => [...list, mockData]);
 	console.log($reservationList);
 </script>
 
-<div>
-	<Card />
-	<Card />
-	<Card />
-	<Card />
-</div>
+<content>
+	{#each $reservationList as card}
+		<Card props={card} />
+	{/each}
+</content>
 
 <style>
-	div {
+	content {
 		width: 100%;
 		background-color: var(--background-secondary);
 		display: grid;

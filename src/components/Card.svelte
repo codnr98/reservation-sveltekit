@@ -1,17 +1,20 @@
-<script>
+<script lang="ts">
 	import PhoneIcon from '../assets/phone.svelte';
 	import CalenderIcon from '../assets/today.svelte';
 	import GroupIcon from '../assets/group.svelte';
 	import EditIcon from '../assets/edit.svelte';
 	import Button from './Button.svelte';
+	import type { Reservation } from '$lib/types';
+
+	export let props: Reservation;
 </script>
 
 <article>
 	<div class="customer-info">
-		<h3>Jason</h3>
+		<h3>{props.name}</h3>
 		<div class="phone-num">
 			<PhoneIcon />
-			<p>010-000-0000</p>
+			<p>{props.phoneNum}</p>
 		</div>
 	</div>
 
@@ -19,7 +22,7 @@
 		<div class="date-info">
 			<CalenderIcon />
 			<p>
-				{'Today, 3:00 PM'}
+				{props.date}
 			</p>
 		</div>
 
@@ -27,17 +30,17 @@
 			<div class="icon-wrapper">
 				<GroupIcon />
 			</div>
-			<p>4</p>
+			<p>{props.guest}</p>
 		</div>
 
 		<div class="table-info">
 			<p>{'Reserved Table'}</p>
-			<p>7</p>
-			<p>· Floor 1</p>
+			<p>{props.table.number}</p>
+			<p>· Floor {props.table.floor}</p>
 		</div>
 
 		<div class="note-info">
-			<p>Note</p>
+			<p>{props.note}</p>
 			<EditIcon />
 		</div>
 	</div>
