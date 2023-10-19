@@ -1,6 +1,7 @@
 <script>
 	import Button from '../../components/Button.svelte';
 	import DorpDownIcon from '../../assets/arrow_drop_down.svelte';
+	import EditIcon from '../../assets/edit.svg';
 
 	const handleClickSelectDateButton = () => {};
 </script>
@@ -41,10 +42,19 @@
 	</div>
 
 	<div class="third">
-		<textarea placeholder="Add Note..." />
+		<textarea placeholder={'Add Note...'} />
 	</div>
 
-	<Button color={'text-orange'} text={'Save'} icon={null} sizeAlign={'outer'} onClick={() => {}} />
+	<div class="submit-button-wrapper">
+		<Button
+			disable={true}
+			color={'orange'}
+			text={'Save'}
+			icon={null}
+			sizeAlign={'outer'}
+			onClick={() => {}}
+		/>
+	</div>
 </form>
 
 <style>
@@ -139,5 +149,10 @@
 		width: 100%;
 		height: 200px;
 		color: var(--black300);
+		margin-bottom: 80px;
+	}
+
+	.submit-button-wrapper {
+		height: 80px;
 	}
 </style>

@@ -9,9 +9,10 @@
 	export let sizeAlign: 'inner' | 'outer';
 	export let color: 'orange' | 'normal' | 'text-orange';
 	export let onClick: () => void;
+	export let disable: boolean = false;
 </script>
 
-<button class="{text ?? 'icon-button'} {sizeAlign} {color}" on:click={onClick}
+<button class="{text ?? 'icon-button'} {sizeAlign} {color}" on:click={onClick} disabled={disable}
 	>{#if icon === 'arrow-left'}
 		<ArrowLeftIcon />
 	{/if}
@@ -41,6 +42,11 @@
 		border-radius: 8px;
 		box-shadow: var(--shadow);
 		cursor: pointer;
+	}
+
+	button:disabled {
+		opacity: 50%;
+		cursor: not-allowed;
 	}
 
 	.icon-button {
