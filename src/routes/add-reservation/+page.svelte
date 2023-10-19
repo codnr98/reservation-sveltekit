@@ -18,6 +18,7 @@
 			/>
 		</div>
 	</div>
+
 	<div class="second">
 		<div class="counter-container">
 			<p class="title">Guests</p>
@@ -27,7 +28,6 @@
 				<Button text={''} icon={'plus'} sizeAlign={'inner'} onClick={() => {}} />
 			</div>
 		</div>
-
 		<div class="select-wrapper">
 			<select>
 				<option>Select Table</option>
@@ -37,6 +37,10 @@
 			</select>
 			<div class="icon-wrapper"><DorpDownIcon /></div>
 		</div>
+	</div>
+
+	<div class="third">
+		<textarea placeholder="Add Note..." />
 	</div>
 </form>
 
@@ -120,5 +124,17 @@
 		right: 20px;
 		top: 50%;
 		transform: translate(0%, -50%);
+	}
+
+	textarea {
+		outline: none;
+		resize: none;
+		border: 1px solid var(--line-normal);
+		padding: 22px 22px;
+		border-radius: 12px;
+		box-sizing: border-box;
+		width: 100%;
+		height: 200px;
+		color: var(--black300);
 	}
 </style>
