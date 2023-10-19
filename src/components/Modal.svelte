@@ -38,7 +38,7 @@
 				<ChevronDown />
 			</div>
 		</di>
-		<Button text="Save" />
+		<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={closeModal} />
 	</div>
 </div>
 

@@ -75,6 +75,5 @@
 
 	p {
 		font-size: 17px;
-		margin-left: 8px;
 	}
 </style>
