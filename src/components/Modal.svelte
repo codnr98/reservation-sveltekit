@@ -38,8 +38,15 @@
 				<ChevronDown />
 			</div>
 		</div>
-		<Button color={'normal'} sizeAlign={'outer'} onClick={closeModal} />
-		<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={closeModal} />
+
+		<div class="button-container">
+			<div class="button-wrapper">
+				<Button icon={'trash'} color={'normal'} sizeAlign={'outer'} onClick={closeModal} />
+			</div>
+			<div class="button-wrapper">
+				<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={closeModal} />
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -99,5 +106,19 @@
 
 	.dial-wrapper:last-child p {
 		font-size: 20px;
+	}
+
+	.button-container {
+		display: flex;
+		width: 100%;
+		gap: 16px;
+	}
+
+	.button-container > * {
+		flex: 1 1 0%;
+	}
+
+	.button-container > div:last-child {
+		flex: 3 1 0%;
 	}
 </style>
