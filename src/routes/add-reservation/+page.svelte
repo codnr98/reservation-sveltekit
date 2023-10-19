@@ -1,6 +1,7 @@
 <script>
 	import Button from '../../components/Button.svelte';
 	import DorpDownIcon from '../../assets/arrow_drop_down.svelte';
+	import Modal from '../../components/Modal.svelte';
 
 	const handleClickSelectDateButton = () => {};
 
@@ -18,13 +19,7 @@
 </script>
 
 {#if showModal}
-	<div class="modal">
-		<div class="modal-content">
-			<h2>Modal Content</h2>
-			<!-- 내용 -->
-			<button on:click={closeModal}>Close</button>
-		</div>
-	</div>
+	<Modal {closeModal} />
 {/if}
 
 <form>
@@ -79,24 +74,6 @@
 </form>
 
 <style>
-	.modal {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		z-index: 1;
-	}
-
-	.modal-content {
-		background-color: white;
-		padding: 20px;
-	}
-
 	form {
 		padding: 12px 26px;
 	}
