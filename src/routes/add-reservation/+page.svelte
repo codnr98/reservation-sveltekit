@@ -20,7 +20,7 @@
 	</div>
 	<div class="second">
 		<div class="counter-container">
-			<p>Guests</p>
+			<p class="title">Guests</p>
 			<div class="counter">
 				<Button text={''} icon={'minus'} sizeAlign={'inner'} onClick={() => {}} />
 				<p class="count">0</p>
@@ -95,6 +95,10 @@
 		border-radius: 12px;
 		width: 55%;
 		position: relative;
+	}
+
+	.title {
+		color: var(--black300);
 	}
 
 	select {
