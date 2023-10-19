@@ -18,6 +18,7 @@
 	<div class="right-btn-wrapper">
 		{#if $page.url.pathname === '/'}
 			<Button
+				color={'normal'}
 				sizeAlign={'inner'}
 				icon={'add'}
 				text={'New Reservation'}
@@ -27,6 +28,7 @@
 
 		{#if $page.url.pathname === '/add-reservation'}
 			<Button
+				color={'normal'}
 				sizeAlign={'inner'}
 				icon={'arrow-left'}
 				text={''}

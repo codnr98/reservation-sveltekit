@@ -11,6 +11,7 @@
 		<input placeholder="phone" />
 		<div class="button-wrapper">
 			<Button
+				color={'normal'}
 				sizeAlign={'outer'}
 				icon={'calendar'}
 				text={'Select Date'}
@@ -23,9 +24,9 @@
 		<div class="counter-container">
 			<p class="title">Guests</p>
 			<div class="counter">
-				<Button text={''} icon={'minus'} sizeAlign={'inner'} onClick={() => {}} />
+				<Button color={'normal'} text={''} icon={'minus'} sizeAlign={'inner'} onClick={() => {}} />
 				<p class="count">0</p>
-				<Button text={''} icon={'plus'} sizeAlign={'inner'} onClick={() => {}} />
+				<Button color={'normal'} text={''} icon={'plus'} sizeAlign={'inner'} onClick={() => {}} />
 			</div>
 		</div>
 		<div class="select-wrapper">
@@ -42,6 +43,8 @@
 	<div class="third">
 		<textarea placeholder="Add Note..." />
 	</div>
+
+	<Button color={'text-orange'} text={'Save'} icon={null} sizeAlign={'outer'} onClick={() => {}} />
 </form>
 
 <style>

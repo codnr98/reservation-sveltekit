@@ -5,14 +5,13 @@
 	import MinusIcon from '../assets/math-minus.svelte';
 	import PlusIcon from '../assets/math-plus.svelte';
 	export let text: string;
-	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus';
+	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus' | null;
 	export let sizeAlign: 'inner' | 'outer';
+	export let color: 'orange' | 'normal' | 'text-orange';
 	export let onClick: () => void;
 </script>
 
-<button
-	class="{icon !== 'add' ? 'icon-button' : ''} {sizeAlign === 'outer' ? 'outer' : ''}"
-	on:click={onClick}
+<button class="{text ?? 'icon-button'} {sizeAlign} {color}" on:click={onClick}
 	>{#if icon === 'arrow-left'}
 		<ArrowLeftIcon />
 	{/if}
@@ -40,15 +39,27 @@
 		align-items: center;
 		padding: 10px 10px;
 		border-radius: 8px;
-		color: var(--orange500);
-		background-color: var(--background-primary2);
 		box-shadow: var(--shadow);
 		cursor: pointer;
 	}
 
 	.icon-button {
 		padding: 4px 4px;
+	}
+
+	.normal {
 		color: var(--black300);
+		background-color: var(--background-primary2);
+	}
+
+	.orange {
+		color: white;
+		background-color: var(--orange500);
+	}
+
+	.text-orange {
+		color: var(--orange500);
+		background-color: var(--background-primary2);
 	}
 
 	.outer {
