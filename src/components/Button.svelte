@@ -4,15 +4,16 @@
 	import CalendarIcon from '../assets/today.svelte';
 	import MinusIcon from '../assets/math-minus.svelte';
 	import PlusIcon from '../assets/math-plus.svelte';
-	export let text: string;
-	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus' | null = null;
+	import TrashIcon from '../assets/trash.svelte';
+	export let text: string = '';
+	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus' | 'trash' | null = null;
 	export let sizeAlign: 'inner' | 'outer';
 	export let color: 'orange' | 'normal' | 'text-orange';
 	export let onClick: () => void;
 	export let disable: boolean = false;
 </script>
 
-<button class="{text ?? 'icon-button'} {sizeAlign} {color}" on:click={onClick} disabled={disable}
+<button class="{sizeAlign} {color}" on:click={onClick} disabled={disable}
 	>{#if icon === 'arrow-left'}
 		<ArrowLeftIcon />
 	{/if}
@@ -28,6 +29,9 @@
 	{#if icon === 'plus'}
 		<PlusIcon />
 	{/if}
+	{#if icon === 'trash'}
+		<TrashIcon />
+	{/if}
 	{#if text}
 		<p>{text}</p>
 	{/if}
@@ -42,15 +46,12 @@
 		border-radius: 8px;
 		box-shadow: var(--shadow);
 		cursor: pointer;
+		gap: 5px;
 	}
 
 	button:disabled {
 		opacity: 50%;
 		cursor: not-allowed;
-	}
-
-	.icon-button {
-		padding: 4px 4px;
 	}
 
 	.normal {

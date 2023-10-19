@@ -19,7 +19,7 @@
 			<CalendarIcon /><input />
 		</label>
 
-		<di class="dial">
+		<div class="dial">
 			<div class="dial-wrapper">
 				<ChevronUp />
 				<p>00</p>
@@ -37,7 +37,8 @@
 				<p>PM</p>
 				<ChevronDown />
 			</div>
-		</di>
+		</div>
+		<Button color={'normal'} sizeAlign={'outer'} onClick={closeModal} />
 		<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={closeModal} />
 	</div>
 </div>
