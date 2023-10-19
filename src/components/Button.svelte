@@ -5,6 +5,7 @@
 	import MinusIcon from '../assets/math-minus.svelte';
 	import PlusIcon from '../assets/math-plus.svelte';
 	import TrashIcon from '../assets/trash.svelte';
+
 	export let text: string = '';
 	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus' | 'trash' | null = null;
 	export let sizeAlign: 'inner' | 'outer';
