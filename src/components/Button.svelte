@@ -2,8 +2,10 @@
 	import AddIcon from '../assets/add.svelte';
 	import ArrowLeftIcon from '../assets/keyboard_backspace.svelte';
 	import CalendarIcon from '../assets/today.svelte';
+	import MinusIcon from '../assets/math-minus.svelte';
+	import PlusIcon from '../assets/math-plus.svelte';
 	export let text: string;
-	export let icon: 'arrow-left' | 'add' | 'calendar';
+	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus';
 	export let sizeAlign: 'inner' | 'outer';
 	export let onClick: () => void;
 </script>
@@ -19,6 +21,12 @@
 	{/if}
 	{#if icon === 'calendar'}
 		<CalendarIcon />
+	{/if}
+	{#if icon === 'minus'}
+		<MinusIcon />
+	{/if}
+	{#if icon === 'plus'}
+		<PlusIcon />
 	{/if}
 	{#if text}
 		<p>{text}</p>
