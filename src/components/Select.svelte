@@ -4,23 +4,27 @@
 	import { tableList } from '../stores/tableStore';
 	let isDrop = false;
 
-	function clickOutside(node) {
-		const handleClick = event => {
-			if (node && !node.contains(event.target) && !event.defaultPrevented) {
-				node.dispatchEvent(new CustomEvent('click_outside', node));
+	const clickOutside = (element, callbackFunction) => {
+		const onClick = event => {
+			if (!element.contains(event.target)) {
+				callbackFunction();
 			}
 		};
 
-		document.addEventListener('click', handleClick, true);
+		document.body.addEventListener('click', onClick);
 
 		return {
+			update(newCallbackFunction) {
+				callbackFunction = newCallbackFunction;
+			},
 			destroy() {
-				document.removeEventListener('click', handleClick, true);
+				document.body.removeEventListener('click', onClick);
 			}
 		};
-	}
+	};
 
-	const handlerClickSelect = () => {
+	const handlerClickSelect = event => {
+		event.stopPropagation();
 		isDrop = true;
 		console.log(isDrop);
 	};
@@ -43,7 +47,7 @@
 	</button>
 
 	{#if isDrop}
-		<ul class="option-list" use:clickOutside on:click_outside={handlerClickSelectOutside}>
+		<ul class="option-list" use:clickOutside={handlerClickSelectOutside}>
 			{#each $tableList as table}
 				<li>{`Table ${table.number} · Floor ${table.floor}`}</li>
 			{/each}
