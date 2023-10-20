@@ -1,29 +1,11 @@
 <script lang="ts">
+	import { clickOutside } from '$lib/utils';
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
 
 	import { tableList } from '../stores/tableStore';
 	let isDrop = false;
 
-	const clickOutside = (element, callbackFunction) => {
-		const onClick = event => {
-			if (!element.contains(event.target)) {
-				callbackFunction();
-			}
-		};
-
-		document.body.addEventListener('click', onClick);
-
-		return {
-			update(newCallbackFunction) {
-				callbackFunction = newCallbackFunction;
-			},
-			destroy() {
-				document.body.removeEventListener('click', onClick);
-			}
-		};
-	};
-
-	const handlerClickSelect = event => {
+	const handlerClickSelect = (event: MouseEvent) => {
 		event.stopPropagation();
 		isDrop = true;
 		console.log(isDrop);

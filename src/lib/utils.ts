@@ -1,3 +1,5 @@
+import type { Action } from 'svelte/action';
+
 export const formatAMPM = (hours: number, minutes: number) => {
 	const ampm = hours >= 12 ? 'PM' : 'AM';
 	hours = hours % 12;
@@ -20,4 +22,23 @@ export const translator = (dateObject: Date) => {
 	if (today.toString == dateObject.toString) monthDate = 'Today';
 
 	return `${monthDate}, ${formatAMPM(hour, minute)}`;
+};
+
+export const clickOutside: Action<HTMLElement, () => void> = (element, callbackFunction) => {
+	const onClick = (event: MouseEvent) => {
+		if (!element.contains(event.target as Node)) {
+			callbackFunction();
+		}
+	};
+
+	document.body.addEventListener('click', onClick);
+
+	return {
+		update(newCallbackFunction) {
+			callbackFunction = newCallbackFunction;
+		},
+		destroy() {
+			document.body.removeEventListener('click', onClick);
+		}
+	};
 };
