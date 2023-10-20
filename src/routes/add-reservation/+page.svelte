@@ -76,6 +76,7 @@
 <style>
 	form {
 		padding: 12px 26px;
+		background-color: var(--background-primary);
 	}
 
 	input {
