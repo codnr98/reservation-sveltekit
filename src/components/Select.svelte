@@ -1,6 +1,7 @@
 <script>
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
 
+	import { tableList } from '../stores/tableStore';
 	let isDrop = false;
 
 	const handlerClickSelect = () => {
@@ -9,18 +10,17 @@
 </script>
 
 <div class="select-wrapper">
-	<div class="select" role="button" on:click={handlerClickSelect}>
+	<button class="select" on:click={handlerClickSelect}>
 		<ul class="select-item-container">
 			<li>hiufasdjf</li>
 			<li>hiufasdjf</li>
 		</ul>
 		<DorpDownIcon />
-	</div>
+	</button>
 	<ul class="option-list {isDrop && 'disable'}">
-		<li>1</li>
-		<li>1</li>
-		<li>1</li>
-		<li>1</li>
+		{#each $tableList as table}
+			<li>{`Table ${table.number} · Floor ${table.floor}`}</li>
+		{/each}
 	</ul>
 </div>
 
