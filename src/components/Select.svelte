@@ -1,19 +1,19 @@
 <script lang="ts">
 	import { clickOutside } from '$lib/utils';
+	import { tableList } from '../stores/tableStore';
+
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
 
-	import { tableList } from '../stores/tableStore';
 	let isDrop = false;
+	let selectValue = [];
 
 	const handlerClickSelect = (event: MouseEvent) => {
 		event.stopPropagation();
 		isDrop = true;
-		console.log(isDrop);
 	};
 
 	const handlerClickSelectOutside = () => {
 		isDrop = false;
-		console.log(isDrop);
 	};
 
 	console.log(isDrop);
@@ -29,11 +29,23 @@
 	</button>
 
 	{#if isDrop}
-		<ul class="option-list" use:clickOutside={handlerClickSelectOutside}>
+		<fieldset use:clickOutside={handlerClickSelectOutside}>
 			{#each $tableList as table}
-				<li>{`Table ${table.number} · Floor ${table.floor}`}</li>
+				<div>
+					<input
+						type="checkbox"
+						checked={selectValue.includes(table)}
+						id={table.id}
+						on:click={() => {
+							selectValue.push(table);
+						}}
+					/>
+					<label for={table.id}>
+						{`Table ${table.number} · Floor ${table.floor}`}
+					</label>
+				</div>
 			{/each}
-		</ul>
+		</fieldset>
 	{/if}
 </div>
 
@@ -44,7 +56,6 @@
 	}
 
 	.select {
-		/* padding: 22px 22px; */
 		border: solid 1px var(--line-normal);
 		border-radius: 12px;
 		display: flex;
@@ -61,30 +72,28 @@
 		gap: 10px;
 	}
 
-	.option-list {
-		z-index: 1;
-		background-color: var(--background-primary);
-		border-radius: 12px;
+	fieldset {
 		position: absolute;
+		z-index: 1;
 		width: 100%;
 		height: 180px;
 		overflow: auto;
 		padding: 5px 16px;
 		margin-top: 10px;
 		border: solid 1px var(--line-normal);
+		border-radius: 12px;
+		background-color: var(--background-primary);
 		color: var(--line-normal);
 	}
 
-	.option-list > li {
-		padding: 5px 0;
+	fieldset > div {
+		padding: 12px 0;
 		border-bottom: solid 1px var(--line-normal);
+		display: flex;
+		gap: 5px;
 	}
 
-	.option-list > li:last-child {
+	fieldset > div:last-child {
 		border-bottom: none;
-	}
-
-	.disable {
-		display: none;
 	}
 </style>

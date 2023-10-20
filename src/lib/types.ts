@@ -12,3 +12,9 @@ export type Reservation = {
 };
 
 export type ReservationList = Reservation[];
+
+export type Table = {
+	id: string;
+	number: number;
+	floor: number;
+};
