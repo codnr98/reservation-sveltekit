@@ -3,9 +3,10 @@
 	import { tableList } from '../stores/tableStore';
 
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
+	import type { Table } from '$lib/types';
 
 	let isDrop = false;
-	let selectValue = [];
+	let selectTable: Table[] = [];
 
 	const handlerClickSelect = (event: MouseEvent) => {
 		event.stopPropagation();
@@ -16,14 +17,17 @@
 		isDrop = false;
 	};
 
-	console.log(isDrop);
+	const isInclude = (arr: Array<Table>, value: Table) => arr.includes(value);
 </script>
 
 <div class="select-wrapper">
 	<button class="select" on:click={handlerClickSelect}>
 		<ul class="select-item-container">
-			<li>hiufasdjf</li>
-			<li>hiufasdjf</li>
+			{#each selectTable as value}
+				<li>{`Table ${value.number} · Floor ${value.floor}`}</li>
+			{:else}
+				<li>{'Select Table'}</li>
+			{/each}
 		</ul>
 		<DorpDownIcon />
 	</button>
@@ -34,10 +38,14 @@
 				<div>
 					<input
 						type="checkbox"
-						checked={selectValue.includes(table)}
+						checked={isInclude(selectTable, table)}
 						id={table.id}
 						on:click={() => {
-							selectValue.push(table);
+							if (isInclude(selectTable, table)) {
+								selectTable = selectTable.filter(value => value.id !== table.id);
+							} else {
+								selectTable = [...selectTable, table];
+							}
 						}}
 					/>
 					<label for={table.id}>

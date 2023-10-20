@@ -37,6 +37,7 @@ export const clickOutside: Action<HTMLElement, () => void> = (element, callbackF
 		update(newCallbackFunction) {
 			callbackFunction = newCallbackFunction;
 		},
+
 		destroy() {
 			document.body.removeEventListener('click', onClick);
 		}
