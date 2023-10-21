@@ -9,15 +9,12 @@
 	import type { SaveDate } from '$lib/types';
 
 	export let closeModal: () => void;
-
 	export let saveDate: Date;
 
+	const dispatch = createEventDispatcher();
 	const currentYear = new Date().getFullYear();
 
-	const dispatch = createEventDispatcher();
-
 	let selectOption = 'time';
-
 	let month = 1;
 	let day = 1;
 	let hour = 12;
@@ -26,15 +23,18 @@
 
 	const loadDate = (saveDate: Date) => {
 		const loadDate = translator(saveDate, 'value') as SaveDate;
-		if (loadDate.month > 12) {
-			month = loadDate.month - 12;
+		console.log(loadDate.hour > 12);
+		if (loadDate.hour > 12) {
+			hour = loadDate.hour - 12;
+			console.log(hour);
 			ampm = 'PM';
 		} else {
-			month = loadDate.month;
+			console.log(loadDate.hour);
+			hour = loadDate.hour;
 			ampm = 'AM';
 		}
+		month = loadDate.month;
 		day = loadDate.date;
-		hour = loadDate.hour;
 		minute = loadDate.minute;
 	};
 
@@ -92,6 +92,7 @@
 		if (ampm === 'PM') {
 			twentyFourHour = hour === 24 ? 0 : hour + 12;
 		}
+
 		return new Date(currentYear, month - 1, day, twentyFourHour, minute);
 	};
 
