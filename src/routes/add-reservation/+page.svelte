@@ -11,6 +11,7 @@
 	let phoneValue = '';
 	let guests = 0;
 	let reservationDate = '';
+	let reservationTables = [];
 
 	const openModal = () => {
 		showModal = true;
@@ -24,6 +25,10 @@
 
 	const handleDate = e => {
 		reservationDate = e.detail;
+	};
+	const handleSelectTable = e => {
+		reservationTables = [...e.detail.selectTable];
+		console.log(reservationTables);
 	};
 </script>
 
@@ -73,7 +78,7 @@
 				/>
 			</div>
 		</div>
-		<Select />
+		<Select on:table={handleSelectTable} />
 	</div>
 
 	<div class="third">

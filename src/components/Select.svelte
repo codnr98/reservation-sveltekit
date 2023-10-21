@@ -5,14 +5,22 @@
 
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
 	import Xmark from '../assets/xmark.svelte';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	let isDrop = false;
 	let selectTable: Table[] = [];
+
+	const dispatchSelectTable = () => {
+		dispatch('table', { selectTable });
+	};
 
 	const handlerClickSelect = (event: MouseEvent) => {
 		event.stopPropagation();
 		if (isDrop) {
 			isDrop = false;
+			dispatchSelectTable();
 		} else {
 			isDrop = true;
 		}
@@ -20,6 +28,7 @@
 
 	const handlerClickSelectOutside = () => {
 		isDrop = false;
+		dispatchSelectTable();
 	};
 
 	const isInclude = (arr: Array<Table>, value: Table) => arr.includes(value);
