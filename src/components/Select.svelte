@@ -11,7 +11,11 @@
 
 	const handlerClickSelect = (event: MouseEvent) => {
 		event.stopPropagation();
-		isDrop = true;
+		if (isDrop) {
+			isDrop = false;
+		} else {
+			isDrop = true;
+		}
 	};
 
 	const handlerClickSelectOutside = () => {
@@ -28,7 +32,8 @@
 				<li class={index > 1 ? 'disable' : ''}>
 					{`Table ${value.number} · Floor ${value.floor}`}
 					<button
-						on:click={() => {
+						on:click={e => {
+							e.stopPropagation();
 							selectTable = selectTable.filter(ele => ele.id !== value.id);
 						}}
 						class="icon-wrapper"
