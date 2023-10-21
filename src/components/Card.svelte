@@ -11,6 +11,8 @@
 
 	export let props: Reservation;
 
+	let isSeat = false;
+
 	const handleClickDeleteButton = () => {
 		reservationList.update(list => (list = [...list.filter(item => item.id !== props.id)]));
 
@@ -24,9 +26,21 @@
 			})
 		);
 	};
+
+	const handleClickSeatedButton = () => {
+		reservationList.update(reservations =>
+			reservations.map(reservation => {
+				if (reservation.id === props.id) {
+					return { ...reservation, isSeat: true };
+				} else {
+					return reservation;
+				}
+			})
+		);
+	};
 </script>
 
-<article>
+<article class={isSeat ? 'disable' : ''}>
 	<div class="customer-info">
 		<h3>{props.name}</h3>
 		<div class="phone-num">
@@ -76,7 +90,12 @@
 			/>
 		</div>
 		<div class="button-wrapper">
-			<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={() => {}} />
+			<Button
+				text="Seated"
+				color={'orange'}
+				sizeAlign={'outer'}
+				onClick={handleClickSeatedButton}
+			/>
 		</div>
 	</div>
 </article>
@@ -167,5 +186,9 @@
 
 	.button-container > div:last-child {
 		flex: 3 1 0%;
+	}
+
+	.disable {
+		display: none;
 	}
 </style>

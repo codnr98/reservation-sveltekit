@@ -26,7 +26,9 @@
 
 <content>
 	{#each $reservationList as card (card.id)}
-		<Card props={card} />
+		{#if !card.isSeat}
+			<Card props={card} />
+		{/if}
 	{/each}
 </content>
 

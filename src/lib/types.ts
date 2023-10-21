@@ -13,6 +13,7 @@ export type Reservation = {
 	guest: number;
 	table: Table[];
 	note: string;
+	isSeat: boolean;
 };
 
 export type ReservationList = Reservation[];

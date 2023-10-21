@@ -44,7 +44,8 @@
 			date: reservationDate,
 			guest: guests,
 			table: reservationTables,
-			note: note
+			note: note,
+			isSeat: false
 		};
 
 		reservationList.update(list => [...list, pathData]);
