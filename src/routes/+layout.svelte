@@ -11,7 +11,7 @@
 		goto('/add-reservation');
 	};
 	const handleClickPreviousButton = () => {
-		goto('/');
+		goto('/..');
 	};
 
 	const countReservation = () => {
@@ -21,6 +21,7 @@
 		});
 		return count;
 	};
+	console.log($page.url, 1);
 </script>
 
 <header>
@@ -35,7 +36,7 @@
 			/>
 		{/if}
 
-		{#if $page.url.pathname === '/add-reservation'}
+		{#if $page.url.pathname === '/add-reservation' || $page.url.pathname.startsWith('/edit/')}
 			<Button
 				color={'normal'}
 				sizeAlign={'inner'}
@@ -52,8 +53,12 @@
 			{#if countReservation()}
 				<div>{countReservation()}</div>
 			{/if}
-		{:else}
+		{/if}
+		{#if $page.url.pathname === '/add-reservation'}
 			<h1>New Reservation</h1>
+		{/if}
+		{#if $page.url.pathname.startsWith('/edit/')}
+			<h1>Edit Reservation</h1>
 		{/if}
 	</div>
 

@@ -9,9 +9,10 @@
 
 	const dispatch = createEventDispatcher();
 
-	let isDrop = false;
-	let selectTable: Table[] = [];
+	export let selectTable: Table[] = [];
 
+	let isDrop = false;
+	console.log(selectTable);
 	const dispatchSelectTable = () => {
 		dispatch('table', { selectTable });
 	};

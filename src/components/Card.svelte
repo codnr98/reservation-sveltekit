@@ -40,65 +40,67 @@
 	};
 </script>
 
-<article class={isSeat ? 'disable' : ''}>
-	<div class="customer-info">
-		<h3>{props.name}</h3>
-		<div class="phone-num">
-			<PhoneIcon />
-			<p>{props.phoneNum}</p>
-		</div>
-	</div>
-
-	<div class="reservation-info">
-		<div class="date-info">
-			<CalenderIcon />
-			<p>
-				{translator(props.date, 'string')}
-			</p>
-		</div>
-
-		<div class="guest-info">
-			<div class="icon-wrapper">
-				<GroupIcon />
+<a href="/edit/{props.id}">
+	<article class={isSeat ? 'disable' : ''}>
+		<div class="customer-info">
+			<h3>{props.name}</h3>
+			<div class="phone-num">
+				<PhoneIcon />
+				<p>{props.phoneNum}</p>
 			</div>
-			<p>{props.guest}</p>
 		</div>
 
-		<div class="table-info">
-			{#if props.table.length}
-				<p>{'Reserved Table'}</p>
-				<p>{props.table.map(table => `${table.number}`)}</p>
-				<p>· Floor {props.table.map(table => `${table.floor}`)}</p>
-			{:else}
-				<p class="empty">No Selected Table</p>
-			{/if}
+		<div class="reservation-info">
+			<div class="date-info">
+				<CalenderIcon />
+				<p>
+					{translator(props.date, 'string')}
+				</p>
+			</div>
+
+			<div class="guest-info">
+				<div class="icon-wrapper">
+					<GroupIcon />
+				</div>
+				<p>{props.guest}</p>
+			</div>
+
+			<div class="table-info">
+				{#if props.table.length}
+					<p>{'Reserved Table'}</p>
+					<p>{props.table.map(table => `${table.number}`)}</p>
+					<p>· Floor {props.table.map(table => `${table.floor}`)}</p>
+				{:else}
+					<p class="empty">No Selected Table</p>
+				{/if}
+			</div>
+
+			<div class="note-info">
+				<p>{props.note}</p>
+				<EditIcon />
+			</div>
 		</div>
 
-		<div class="note-info">
-			<p>{props.note}</p>
-			<EditIcon />
+		<div class="button-container">
+			<div class="button-wrapper">
+				<Button
+					icon={'trash'}
+					color={'normal'}
+					sizeAlign={'outer'}
+					onClick={handleClickDeleteButton}
+				/>
+			</div>
+			<div class="button-wrapper">
+				<Button
+					text="Seated"
+					color={'orange'}
+					sizeAlign={'outer'}
+					onClick={handleClickSeatedButton}
+				/>
+			</div>
 		</div>
-	</div>
-
-	<div class="button-container">
-		<div class="button-wrapper">
-			<Button
-				icon={'trash'}
-				color={'normal'}
-				sizeAlign={'outer'}
-				onClick={handleClickDeleteButton}
-			/>
-		</div>
-		<div class="button-wrapper">
-			<Button
-				text="Seated"
-				color={'orange'}
-				sizeAlign={'outer'}
-				onClick={handleClickSeatedButton}
-			/>
-		</div>
-	</div>
-</article>
+	</article>
+</a>
 
 <style>
 	article {
