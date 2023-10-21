@@ -220,7 +220,7 @@
 		align-items: center;
 		justify-content: space-between;
 		height: 100px;
-		width: 40px;
+		width: 80px;
 	}
 	.dial-wrapper > p {
 		font-size: 26px;
