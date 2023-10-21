@@ -23,10 +23,10 @@
 <div class="select-wrapper">
 	<button class="select" on:click={handlerClickSelect}>
 		<ul class="select-item-container">
-			{#each selectTable as value}
-				<li>{`Table ${value.number} · Floor ${value.floor}`}</li>
+			{#each selectTable as value, index}
+				<li class={index > 1 ? 'disable' : ''}>{`Table ${value.number} · Floor ${value.floor}`}</li>
 			{:else}
-				<li>{'Select Table'}</li>
+				<p>{'Select Table'}</p>
 			{/each}
 		</ul>
 		<DorpDownIcon />
@@ -77,7 +77,14 @@
 
 	.select-item-container {
 		display: flex;
+		flex-wrap: nowrap;
 		gap: 10px;
+	}
+
+	.select-item-container > li {
+		padding: 10px;
+		border-radius: 16px;
+		background-color: var(--background-secondary);
 	}
 
 	fieldset {
@@ -103,5 +110,9 @@
 
 	fieldset > div:last-child {
 		border-bottom: none;
+	}
+
+	.disable {
+		display: none;
 	}
 </style>
