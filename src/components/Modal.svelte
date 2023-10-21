@@ -7,79 +7,24 @@
 
 	export let closeModal: () => void;
 
+	let selectOption = 'time';
+
 	let hour = 12;
 	let minute = 0;
 	let ampm = 'AM';
 
-	let selectOption = 'time';
-
-	const incrementHour = () => {
-		if (hour === 12) toggleAMPM();
-		hour = hour === 12 ? 1 : hour + 1;
-	};
-
-	const decrementHour = () => {
-		if (hour === 1) toggleAMPM();
-		hour = hour === 1 ? 12 : hour - 1;
-	};
-
-	const incrementMinute = () => {
-		minute++;
-		if (minute > 59) {
-			minute = 0;
-			incrementHour();
-		}
-	};
-
-	const decrementMinute = () => {
-		minute--;
-		if (minute < 0) {
-			minute = 59;
-			decrementHour();
-		}
-	};
-
-	const toggleAMPM = () => {
-		ampm = ampm === 'AM' ? 'PM' : 'AM';
-	};
-
-	const padZero = (num: number) => num.toString().padStart(2, '0');
-
 	let month = 1;
 	let day = 1;
 
-	const thirtyMonth = [4, 6, 9, 11];
-
-	const incrementMonth = () => {
-		month = month === 12 ? 1 : month + 1;
-	};
-
-	const decrementMonth = () => {
-		month = month === 1 ? 12 : month - 1;
-	};
-
-	const incrementDay = () => {
-		day++;
-		if (day > dayOfMonth(month)) {
-			day = 1;
-			incrementMonth();
-		}
-	};
-
-	const decrementDay = () => {
-		day--;
-		if (day < 1) {
-			day = dayOfMonth(month - 1);
-			decrementMonth();
-		}
-	};
-
-	const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+	const padZero = (num: number) => num.toString().padStart(2, '0');
 
 	const dayOfMonth = (month: number) => {
+		const thirtyMonth = [4, 6, 9, 11];
 		const currentYear = new Date().getFullYear();
+		const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
 		if (month === 2) return isLeapYear(currentYear) ? 29 : 28;
+
 		return thirtyMonth.includes(month) ? 30 : 31;
 	};
 
@@ -89,11 +34,58 @@
 
 		return date.toLocaleString('en-US', { month: 'long' });
 	};
+
+	const incrementHour = () => {
+		if (hour === 12) toggleAMPM();
+		hour = hour === 12 ? 1 : hour + 1;
+	};
+	const decrementHour = () => {
+		if (hour === 1) toggleAMPM();
+		hour = hour === 1 ? 12 : hour - 1;
+	};
+	const incrementMinute = () => {
+		minute++;
+		if (minute > 59) {
+			minute = 0;
+			incrementHour();
+		}
+	};
+	const decrementMinute = () => {
+		minute--;
+		if (minute < 0) {
+			minute = 59;
+			decrementHour();
+		}
+	};
+	const toggleAMPM = () => {
+		ampm = ampm === 'AM' ? 'PM' : 'AM';
+	};
+
+	const incrementMonth = () => {
+		month = month === 12 ? 1 : month + 1;
+	};
+	const decrementMonth = () => {
+		month = month === 1 ? 12 : month - 1;
+	};
+	const incrementDay = () => {
+		day++;
+		if (day > dayOfMonth(month)) {
+			day = 1;
+			incrementMonth();
+		}
+	};
+	const decrementDay = () => {
+		day--;
+		if (day < 1) {
+			day = dayOfMonth(month - 1);
+			decrementMonth();
+		}
+	};
 </script>
 
 <div class="modal-outside">
 	<div class="modal-content">
-		<div
+		<button
 			class="indicator-wrapper"
 			on:click={() => {
 				selectOption = 'time';
@@ -103,8 +95,9 @@
 			<div class="{selectOption === 'time' ? 'active' : ''} indicator">
 				{`${padZero(hour)}:${padZero(minute)} ${ampm}`}
 			</div>
-		</div>
-		<div
+		</button>
+
+		<button
 			class="indicator-wrapper"
 			on:click={() => {
 				selectOption = 'date';
@@ -114,7 +107,7 @@
 			<div class="{selectOption === 'date' ? 'active' : ''} indicator">
 				{`${getMonthName(month)} ${day}`}
 			</div>
-		</div>
+		</button>
 
 		{#if selectOption === 'time'}
 			<div class="dial">
@@ -208,18 +201,20 @@
 		width: 30%;
 	}
 
-	.indicator {
-		border: 1px solid var(--line-normal);
-		padding: 20px 20px;
-		border-radius: 12px;
-		width: 250px;
-		color: var(--black300);
-	}
-
 	.indicator-wrapper {
 		display: flex;
 		align-items: center;
+		width: 250px;
 		gap: 10px;
+	}
+
+	.indicator {
+		width: 100%;
+		text-align: start;
+		border: 1px solid var(--line-normal);
+		padding: 20px 20px;
+		border-radius: 12px;
+		color: var(--black300);
 	}
 
 	.dial {
