@@ -36,9 +36,13 @@
 		</div>
 
 		<div class="table-info">
-			<p>{'Reserved Table'}</p>
-			<p>{props.table.map(table => `${table.number}`)}</p>
-			<p>· Floor {props.table.map(table => `${table.floor}`)}</p>
+			{#if props.table.length}
+				<p>{'Reserved Table'}</p>
+				<p>{props.table.map(table => `${table.number}`)}</p>
+				<p>· Floor {props.table.map(table => `${table.floor}`)}</p>
+			{:else}
+				<p class="empty">No Selected Table</p>
+			{/if}
 		</div>
 
 		<div class="note-info">
@@ -123,6 +127,12 @@
 	.table-info > p:nth-child(2) {
 		color: var(--black400);
 		font-size: 20px;
+	}
+
+	.empty {
+		color: var(--black300);
+		font-style: italic;
+		font-size: 17px;
 	}
 
 	.note-info {
