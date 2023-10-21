@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import type { Table } from '$lib/types';
 	import Button from '../../components/Button.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Select from '../../components/Select.svelte';
@@ -10,8 +11,9 @@
 	let nameValue = '';
 	let phoneValue = '';
 	let guests = 0;
-	let reservationDate = '';
+	let reservationDate;
 	let reservationTables = [];
+	let note = '';
 
 	const openModal = () => {
 		showModal = true;
@@ -23,10 +25,11 @@
 		document.body.style.overflow = '';
 	};
 
-	const handleDate = e => {
+	const handleDate = (e: CustomEvent<{ date: Date }>) => {
 		reservationDate = e.detail;
 	};
-	const handleSelectTable = e => {
+
+	const handleSelectTable = (e: CustomEvent<{ selectTable: Table[] }>) => {
 		reservationTables = [...e.detail.selectTable];
 		console.log(reservationTables);
 	};
