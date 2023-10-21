@@ -4,8 +4,11 @@
 	import ChevronUpIcon from '../assets/chevron-up.svelte';
 	import ChevronDownIcon from '../assets/chevron-down.svelte';
 	import Button from './Button.svelte';
+	import { createEventDispatcher } from 'svelte';
 
 	export let closeModal: () => void;
+
+	const currentYear = new Date().getFullYear();
 
 	let selectOption = 'time';
 
@@ -20,7 +23,6 @@
 
 	const dayOfMonth = (month: number) => {
 		const thirtyMonth = [4, 6, 9, 11];
-		const currentYear = new Date().getFullYear();
 		const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
 		if (month === 2) return isLeapYear(currentYear) ? 29 : 28;
@@ -80,6 +82,23 @@
 			day = dayOfMonth(month - 1);
 			decrementMonth();
 		}
+	};
+
+	const dispatch = createEventDispatcher();
+
+	const dateObject = () => {
+		let twentyHour = hour;
+		if (ampm === 'PM') {
+			twentyHour = hour === 24 ? 0 : hour + 12;
+		}
+		return new Date(currentYear, month - 1, day, twentyHour, minute);
+	};
+
+	const dispatchData = () => {
+		dispatch('date', {
+			date: dateObject()
+		});
+		closeModal();
 	};
 </script>
 
@@ -170,7 +189,7 @@
 				<Button icon={'trash'} color={'normal'} sizeAlign={'outer'} onClick={closeModal} />
 			</div>
 			<div class="button-wrapper">
-				<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={closeModal} />
+				<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={dispatchData} />
 			</div>
 		</div>
 	</div>

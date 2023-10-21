@@ -8,10 +8,9 @@
 	let showModal = false;
 
 	let nameValue = '';
-
 	let phoneValue = '';
-
 	let guests = 0;
+	let reservationDate = '';
 
 	const openModal = () => {
 		showModal = true;
@@ -22,10 +21,14 @@
 		showModal = false;
 		document.body.style.overflow = '';
 	};
+
+	const handleDate = e => {
+		reservationDate = e.detail;
+	};
 </script>
 
 {#if showModal}
-	<Modal {closeModal} />
+	<Modal {closeModal} on:date={handleDate} />
 {/if}
 
 <form>
