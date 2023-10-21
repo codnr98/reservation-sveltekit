@@ -38,16 +38,16 @@
 		{/if}
 	</div>
 
-	{#if $page.url.pathname === '/'}
-		<div class="title">
+	<div class="title">
+		{#if $page.url.pathname === '/'}
 			<h1>Reservation</h1>
 			{#if $reservationList.length}
 				<div>{$reservationList.length}</div>
 			{/if}
-		</div>
-	{:else}
-		<h1>New Reservation</h1>
-	{/if}
+		{:else}
+			<h1>New Reservation</h1>
+		{/if}
+	</div>
 
 	<div class="left-btn-wrapper">
 		<button class="close-btn">

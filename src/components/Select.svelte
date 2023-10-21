@@ -28,6 +28,9 @@
 			{:else}
 				<p>{'Select Table'}</p>
 			{/each}
+			{#if selectTable.length > 2}
+				<p>...</p>
+			{/if}
 		</ul>
 		<DorpDownIcon />
 	</button>
@@ -79,6 +82,7 @@
 		display: flex;
 		flex-wrap: nowrap;
 		gap: 10px;
+		align-items: center;
 	}
 
 	.select-item-container > li {
