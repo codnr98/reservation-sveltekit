@@ -6,34 +6,86 @@
 	import Button from './Button.svelte';
 
 	export let closeModal: () => void;
+
+	let hour = 12;
+	let minute = 0;
+	let ampm = 'AM';
+
+	const incrementHour = () => {
+		if (hour === 12) toggleAMPM();
+		hour = hour === 12 ? 1 : hour + 1;
+	};
+
+	const decrementHour = () => {
+		if (hour === 1) toggleAMPM();
+		hour = hour === 1 ? 12 : hour - 1;
+	};
+
+	const incrementMinute = () => {
+		minute++;
+		if (minute > 59) {
+			minute = 0;
+			incrementHour();
+		}
+	};
+
+	const decrementMinute = () => {
+		minute--;
+		if (minute < 0) {
+			minute = 59;
+			decrementHour();
+		}
+	};
+
+	const toggleAMPM = () => {
+		ampm = ampm === 'AM' ? 'PM' : 'AM';
+	};
+
+	const padZero = (num: number) => num.toString().padStart(2, '0');
 </script>
 
 <div class="modal">
 	<div class="modal-content">
-		<label>
-			<AlarmIcon /><input />
-		</label>
-		<label>
-			<CalendarIcon /><input />
-		</label>
+		<div class="indicator-wrapper">
+			<AlarmIcon />
+			<div class="indicator">
+				{`${padZero(hour)}:${padZero(minute)} ${ampm}`}
+			</div>
+		</div>
+		<div class="indicator-wrapper">
+			<CalendarIcon />
+			<div class="indicator" />
+		</div>
 
 		<div class="dial">
 			<div class="dial-wrapper">
-				<ChevronUpIcon />
-				<p>00</p>
-				<ChevronDownIcon />
+				<button on:click={incrementHour}>
+					<ChevronUpIcon />
+				</button>
+				<p>{padZero(hour)}</p>
+				<button on:click={decrementHour}>
+					<ChevronDownIcon />
+				</button>
 			</div>
 			<p>:</p>
 			<div class="dial-wrapper">
-				<ChevronUpIcon />
-				<p>00</p>
-				<ChevronDownIcon />
+				<button on:click={incrementMinute}>
+					<ChevronUpIcon />
+				</button>
+				<p>{padZero(minute)}</p>
+				<button on:click={decrementMinute}>
+					<ChevronDownIcon />
+				</button>
 			</div>
 			<p />
 			<div class="dial-wrapper">
-				<ChevronUpIcon />
-				<p>PM</p>
-				<ChevronDownIcon />
+				<button on:click={toggleAMPM}>
+					<ChevronUpIcon />
+				</button>
+				<p>{ampm}</p>
+				<button on:click={toggleAMPM}>
+					<ChevronDownIcon />
+				</button>
 			</div>
 		</div>
 
@@ -72,13 +124,15 @@
 		border-radius: 12px;
 	}
 
-	input {
+	.indicator {
 		border: 1px solid var(--line-normal);
 		padding: 20px 20px;
 		border-radius: 12px;
+		width: 250px;
+		color: var(--black300);
 	}
 
-	label {
+	.indicator-wrapper {
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -98,6 +152,7 @@
 		align-items: center;
 		justify-content: space-between;
 		height: 100px;
+		width: 40px;
 	}
 	.dial-wrapper > p {
 		font-size: 26px;
