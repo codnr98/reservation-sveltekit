@@ -7,8 +7,23 @@
 	import type { Reservation } from '$lib/types';
 	import { translator } from '$lib/utils/dateUtils';
 	import { reservationList } from '../stores/reservationStore';
+	import { tableList } from '../stores/tableStore';
 
 	export let props: Reservation;
+
+	const handleClickDeleteButton = () => {
+		reservationList.update(list => (list = [...list.filter(item => item.id !== props.id)]));
+
+		tableList.update(tables =>
+			tables.map(table => {
+				if (props.table.some(selected => selected.id === table.id)) {
+					return { ...table, isUse: false };
+				} else {
+					return table;
+				}
+			})
+		);
+	};
 </script>
 
 <article>
@@ -57,9 +72,7 @@
 				icon={'trash'}
 				color={'normal'}
 				sizeAlign={'outer'}
-				onClick={() => {
-					reservationList.update(list => (list = [...list.filter(item => item.id !== props.id)]));
-				}}
+				onClick={handleClickDeleteButton}
 			/>
 		</div>
 		<div class="button-wrapper">
