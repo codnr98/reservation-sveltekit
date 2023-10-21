@@ -11,7 +11,7 @@
 		goto('/add-reservation');
 	};
 	const handleClickPreviousButton = () => {
-		goto('/..');
+		goto('/');
 	};
 </script>
 

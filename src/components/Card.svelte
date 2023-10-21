@@ -6,6 +6,7 @@
 	import Button from './Button.svelte';
 	import type { Reservation } from '$lib/types';
 	import { translator } from '$lib/utils/dateUtils';
+	import { reservationList } from '../stores/reservationStore';
 
 	export let props: Reservation;
 </script>
@@ -48,7 +49,14 @@
 
 	<div class="button-container">
 		<div class="button-wrapper">
-			<Button icon={'trash'} color={'normal'} sizeAlign={'outer'} onClick={() => {}} />
+			<Button
+				icon={'trash'}
+				color={'normal'}
+				sizeAlign={'outer'}
+				onClick={() => {
+					reservationList.update(list => (list = [...list.filter(item => item.id !== props.id)]));
+				}}
+			/>
 		</div>
 		<div class="button-wrapper">
 			<Button text="Save" color={'orange'} sizeAlign={'outer'} onClick={() => {}} />

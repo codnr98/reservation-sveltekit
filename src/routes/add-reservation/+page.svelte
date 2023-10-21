@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import type { Table } from '$lib/types';
 	import Button from '../../components/Button.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Select from '../../components/Select.svelte';
+	import { reservationList } from '../../stores/reservationStore';
 
 	const handleClickSubmitButton = () => {
-		return {
+		const pathData = {
 			id: new Date().toString(),
 			name: nameValue,
 			phoneNum: phoneValue,
@@ -14,6 +16,12 @@
 			table: reservationTables,
 			note: note
 		};
+
+		reservationList.update(list => [...list, pathData]);
+
+		setTimeout(() => {
+			goto('/');
+		}, 0);
 	};
 
 	let showModal = false;
@@ -105,7 +113,7 @@
 			text={'Save'}
 			icon={null}
 			sizeAlign={'outer'}
-			onClick={() => {}}
+			onClick={handleClickSubmitButton}
 		/>
 	</div>
 </form>

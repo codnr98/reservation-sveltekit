@@ -22,8 +22,6 @@
 		],
 		note: '많이 주세요'
 	};
-
-	reservationList.update(list => [...list, mockData]);
 </script>
 
 <content>
