@@ -42,6 +42,42 @@
 	};
 
 	const padZero = (num: number) => num.toString().padStart(2, '0');
+
+	let month = 1;
+	let day = 1;
+
+	const thirtyMonth = [4, 6, 9, 11];
+
+	const incrementMonth = () => {
+		month = month === 12 ? 1 : month + 1;
+	};
+
+	const decrementMonth = () => {
+		month = month === 1 ? 12 : month - 1;
+	};
+
+	const incrementDay = () => {
+		day++;
+		if (day > 31) {
+			day = 1;
+		}
+	};
+
+	const decrementDay = () => {
+		day--;
+		if (day < 0) {
+			day = 31;
+		}
+	};
+
+	const getMonthName = (monthNumber: number) => {
+		const date = new Date();
+		date.setMonth(monthNumber - 1);
+
+		return date.toLocaleString('en-US', { month: 'long' });
+	};
+
+	const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 </script>
 
 <div class="modal">
@@ -54,7 +90,9 @@
 		</div>
 		<div class="indicator-wrapper">
 			<CalendarIcon />
-			<div class="indicator" />
+			<div class="indicator">
+				{`${padZero(month)}:${padZero(day)}`}
+			</div>
 		</div>
 
 		<div class="dial">
@@ -84,6 +122,27 @@
 				</button>
 				<p>{ampm}</p>
 				<button on:click={toggleAMPM}>
+					<ChevronDownIcon />
+				</button>
+			</div>
+		</div>
+
+		<div class="dial">
+			<div class="dial-wrapper">
+				<button on:click={incrementMonth}>
+					<ChevronUpIcon />
+				</button>
+				<p>{getMonthName(month)}</p>
+				<button on:click={decrementMonth}>
+					<ChevronDownIcon />
+				</button>
+			</div>
+			<div class="dial-wrapper">
+				<button on:click={incrementDay}>
+					<ChevronUpIcon />
+				</button>
+				<p>{padZero(day)}</p>
+				<button on:click={decrementDay}>
 					<ChevronDownIcon />
 				</button>
 			</div>
@@ -158,7 +217,7 @@
 		font-size: 26px;
 	}
 
-	.dial-wrapper:last-child p {
+	.dial-wrapper:nth-child(5) p {
 		font-size: 20px;
 	}
 
