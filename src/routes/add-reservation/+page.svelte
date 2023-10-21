@@ -4,7 +4,17 @@
 	import Modal from '../../components/Modal.svelte';
 	import Select from '../../components/Select.svelte';
 
-	const handleClickSelectDateButton = () => {};
+	const handleClickSubmitButton = () => {
+		return {
+			id: new Date().toString(),
+			name: nameValue,
+			phoneNum: phoneValue,
+			date: reservationDate,
+			guest: guests,
+			table: reservationTables,
+			note: note
+		};
+	};
 
 	let showModal = false;
 
@@ -12,7 +22,7 @@
 	let phoneValue = '';
 	let guests = 0;
 	let reservationDate = new Date();
-	let reservationTables = [];
+	let reservationTables: Table[] = [];
 	let note = '';
 
 	const openModal = () => {

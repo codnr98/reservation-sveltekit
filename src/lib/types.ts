@@ -1,23 +1,20 @@
+export type Table = {
+	id: string;
+	number: number;
+	floor: number;
+};
+
 export type Reservation = {
 	id: string;
 	name: string;
 	phoneNum: string;
 	date: Date;
 	guest: number;
-	table: {
-		number: number;
-		floor: number;
-	};
+	table: Table[];
 	note: string;
 };
 
 export type ReservationList = Reservation[];
-
-export type Table = {
-	id: string;
-	number: number;
-	floor: number;
-};
 
 export type SaveDate = {
 	month: number;

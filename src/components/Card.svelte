@@ -36,8 +36,8 @@
 
 		<div class="table-info">
 			<p>{'Reserved Table'}</p>
-			<p>{props.table.number}</p>
-			<p>· Floor {props.table.floor}</p>
+			<p>{props.table.map(table => `${table.number}`)}</p>
+			<p>· Floor {props.table.map(table => `${table.floor}`)}</p>
 		</div>
 
 		<div class="note-info">

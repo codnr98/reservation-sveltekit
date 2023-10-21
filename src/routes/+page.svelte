@@ -3,24 +3,31 @@
 	import { reservationList } from '../stores/reservationStore';
 
 	const mockData = {
-		id: '1',
+		id: new Date().toString(),
 		name: 'Lee',
 		phoneNum: '010-123-1234',
 		date: new Date(),
 		guest: 2,
-		table: {
-			number: 8,
-			floor: 1
-		},
+		table: [
+			{
+				id: '1',
+				number: 8,
+				floor: 1
+			},
+			{
+				id: '1',
+				number: 8,
+				floor: 1
+			}
+		],
 		note: '많이 주세요'
 	};
 
 	reservationList.update(list => [...list, mockData]);
-	console.log($reservationList);
 </script>
 
 <content>
-	{#each $reservationList as card}
+	{#each $reservationList as card (card.id)}
 		<Card props={card} />
 	{/each}
 </content>

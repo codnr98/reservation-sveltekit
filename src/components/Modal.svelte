@@ -23,7 +23,11 @@
 
 	const loadDate = (saveDate: Date) => {
 		const loadDate = translator(saveDate, 'value') as SaveDate;
-		console.log(loadDate.hour > 12);
+
+		month = loadDate.month;
+		day = loadDate.date;
+		minute = loadDate.minute;
+
 		if (loadDate.hour > 12) {
 			hour = loadDate.hour - 12;
 			console.log(hour);
@@ -33,9 +37,6 @@
 			hour = loadDate.hour;
 			ampm = 'AM';
 		}
-		month = loadDate.month;
-		day = loadDate.date;
-		minute = loadDate.minute;
 	};
 
 	$: loadDate(saveDate);
