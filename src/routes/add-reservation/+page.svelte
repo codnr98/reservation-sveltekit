@@ -11,7 +11,7 @@
 	let nameValue = '';
 	let phoneValue = '';
 	let guests = 0;
-	let reservationDate;
+	let reservationDate = new Date();
 	let reservationTables = [];
 	let note = '';
 
@@ -26,7 +26,7 @@
 	};
 
 	const handleDate = (e: CustomEvent<{ date: Date }>) => {
-		reservationDate = e.detail;
+		reservationDate = e.detail.date;
 	};
 
 	const handleSelectTable = (e: CustomEvent<{ selectTable: Table[] }>) => {
@@ -36,13 +36,13 @@
 </script>
 
 {#if showModal}
-	<Modal {closeModal} on:date={handleDate} />
+	<Modal {closeModal} on:date={handleDate} saveDate={reservationDate} />
 {/if}
 
 <form>
 	<div class="first">
-		<input placeholder="name" bind:value={nameValue} />
-		<input placeholder="phone" bind:value={phoneValue} />
+		<input placeholder="name＊" bind:value={nameValue} />
+		<input placeholder="phone＊" bind:value={phoneValue} />
 		<div class="button-wrapper">
 			<Button
 				color={'normal'}
@@ -85,12 +85,12 @@
 	</div>
 
 	<div class="third">
-		<textarea placeholder={'Add Note...'} />
+		<textarea placeholder={'Add Note...'} bind:value={note} />
 	</div>
 
 	<div class="submit-button-wrapper">
 		<Button
-			disable={true}
+			disable={!(nameValue.length > 0 && phoneValue.length > 0)}
 			color={'orange'}
 			text={'Save'}
 			icon={null}

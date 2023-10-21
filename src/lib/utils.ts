@@ -9,19 +9,30 @@ export const formatAMPM = (hours: number, minutes: number) => {
 	return strTime;
 };
 
-export const translator = (dateObject: Date) => {
+export const translator = (dateObject: Date, dataType: 'string' | 'value') => {
 	const today = new Date();
-
-	const month = dateObject.toLocaleString('en', { month: 'long' });
+	let month: number | string = '';
 	const date = dateObject.getDate();
 	const hour = dateObject.getHours();
 	const minute = dateObject.getMinutes();
 
 	let monthDate = `${month} ${date}`;
 
-	if (today.toString == dateObject.toString) monthDate = 'Today';
+	if (dataType === 'string') {
+		month = dateObject.toLocaleString('en', { month: 'long' });
+		if (today.toString == dateObject.toString) monthDate = 'Today';
+		return `${monthDate}, ${formatAMPM(hour, minute)}`;
+	}
 
-	return `${monthDate}, ${formatAMPM(hour, minute)}`;
+	if (dataType === 'value') {
+		month = dateObject.getMonth() + 1;
+		return {
+			month: month,
+			date: date,
+			hour: hour,
+			minute: minute
+		};
+	}
 };
 
 export const clickOutside: Action<HTMLElement, () => void> = (element, callbackFunction) => {

@@ -5,19 +5,42 @@
 	import ChevronDownIcon from '../assets/chevron-down.svelte';
 	import Button from './Button.svelte';
 	import { createEventDispatcher } from 'svelte';
+	import { translator } from '$lib/utils';
 
 	export let closeModal: () => void;
+
+	export let saveDate: Date;
 
 	const currentYear = new Date().getFullYear();
 
 	let selectOption = 'time';
 
+	let month = 1;
+	let day = 1;
 	let hour = 12;
 	let minute = 0;
 	let ampm = 'AM';
 
-	let month = 1;
-	let day = 1;
+	const loadDate = (saveDate: Date) => {
+		const x = translator(saveDate, 'value') as {
+			month: number;
+			date: number;
+			hour: number;
+			minute: number;
+		};
+		if (x.month > 12) {
+			month = x.month - 12;
+			ampm = 'PM';
+		} else {
+			month = x.month;
+			ampm = 'AM';
+		}
+		day = x.date;
+		hour = x.hour;
+		minute = x.minute;
+	};
+
+	$: loadDate(saveDate);
 
 	const padZero = (num: number) => num.toString().padStart(2, '0');
 
@@ -87,11 +110,11 @@
 	const dispatch = createEventDispatcher();
 
 	const dateObject = () => {
-		let twentyHour = hour;
+		let twentyFourHour = hour;
 		if (ampm === 'PM') {
-			twentyHour = hour === 24 ? 0 : hour + 12;
+			twentyFourHour = hour === 24 ? 0 : hour + 12;
 		}
-		return new Date(currentYear, month - 1, day, twentyHour, minute);
+		return new Date(currentYear, month - 1, day, twentyFourHour, minute);
 	};
 
 	const dispatchData = () => {
