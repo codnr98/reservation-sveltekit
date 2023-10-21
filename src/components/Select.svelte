@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clickOutside } from '$lib/utils';
+	import { clickOutside } from '$lib/utils/utils';
 	import { tableList } from '../stores/tableStore';
 	import type { Table } from '$lib/types';
 

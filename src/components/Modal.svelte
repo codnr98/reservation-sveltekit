@@ -5,7 +5,7 @@
 	import ChevronDownIcon from '../assets/chevron-down.svelte';
 	import Button from './Button.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import { translator } from '$lib/utils';
+	import { dayOfMonth, getMonthName, padZero, translator } from '$lib/utils/dateUtils';
 	import type { SaveDate } from '$lib/types';
 
 	export let closeModal: () => void;
@@ -13,6 +13,8 @@
 	export let saveDate: Date;
 
 	const currentYear = new Date().getFullYear();
+
+	const dispatch = createEventDispatcher();
 
 	let selectOption = 'time';
 
@@ -23,38 +25,20 @@
 	let ampm = 'AM';
 
 	const loadDate = (saveDate: Date) => {
-		const x = translator(saveDate, 'value') as SaveDate;
-		if (x.month > 12) {
-			month = x.month - 12;
+		const loadDate = translator(saveDate, 'value') as SaveDate;
+		if (loadDate.month > 12) {
+			month = loadDate.month - 12;
 			ampm = 'PM';
 		} else {
-			month = x.month;
+			month = loadDate.month;
 			ampm = 'AM';
 		}
-		day = x.date;
-		hour = x.hour;
-		minute = x.minute;
+		day = loadDate.date;
+		hour = loadDate.hour;
+		minute = loadDate.minute;
 	};
 
 	$: loadDate(saveDate);
-
-	const padZero = (num: number) => num.toString().padStart(2, '0');
-
-	const dayOfMonth = (month: number) => {
-		const thirtyMonth = [4, 6, 9, 11];
-		const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
-
-		if (month === 2) return isLeapYear(currentYear) ? 29 : 28;
-
-		return thirtyMonth.includes(month) ? 30 : 31;
-	};
-
-	const getMonthName = (monthNumber: number) => {
-		const date = new Date();
-		date.setMonth(monthNumber - 1);
-
-		return date.toLocaleString('en-US', { month: 'long' });
-	};
 
 	const incrementHour = () => {
 		if (hour === 12) toggleAMPM();
@@ -102,8 +86,6 @@
 			decrementMonth();
 		}
 	};
-
-	const dispatch = createEventDispatcher();
 
 	const dateObject = () => {
 		let twentyFourHour = hour;

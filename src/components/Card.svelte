@@ -5,7 +5,7 @@
 	import EditIcon from '../assets/edit.svelte';
 	import Button from './Button.svelte';
 	import type { Reservation } from '$lib/types';
-	import { translator } from '$lib/utils';
+	import { translator } from '$lib/utils/dateUtils';
 
 	export let props: Reservation;
 </script>
@@ -23,7 +23,7 @@
 		<div class="date-info">
 			<CalenderIcon />
 			<p>
-				{translator(props.date)}
+				{translator(props.date, 'string')}
 			</p>
 		</div>
 

@@ -1,5 +1,3 @@
-import type { Action } from 'svelte/action';
-
 export const formatAMPM = (hours: number, minutes: number) => {
 	const ampm = hours >= 12 ? 'PM' : 'AM';
 	hours = hours % 12;
@@ -35,22 +33,21 @@ export const translator = (dateObject: Date, dataType: 'string' | 'value') => {
 	}
 };
 
-export const clickOutside: Action<HTMLElement, () => void> = (element, callbackFunction) => {
-	const onClick = (event: MouseEvent) => {
-		if (!element.contains(event.target as Node)) {
-			callbackFunction();
-		}
-	};
+export const padZero = (num: number) => num.toString().padStart(2, '0');
 
-	document.body.addEventListener('click', onClick);
+export const dayOfMonth = (month: number) => {
+	const currentYear = new Date().getFullYear();
+	const thirtyMonth = [4, 6, 9, 11];
+	const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
-	return {
-		update(newCallbackFunction) {
-			callbackFunction = newCallbackFunction;
-		},
+	if (month === 2) return isLeapYear(currentYear) ? 29 : 28;
 
-		destroy() {
-			document.body.removeEventListener('click', onClick);
-		}
-	};
+	return thirtyMonth.includes(month) ? 30 : 31;
+};
+
+export const getMonthName = (monthNumber: number) => {
+	const date = new Date();
+	date.setMonth(monthNumber - 1);
+
+	return date.toLocaleString('en-US', { month: 'long' });
 };
