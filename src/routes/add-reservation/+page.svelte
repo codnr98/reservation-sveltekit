@@ -7,17 +7,21 @@
 
 	let showModal = false;
 
+	let nameValue = '';
+
+	let phoneValue = '';
+
 	let guests = 0;
 
-	function openModal() {
+	const openModal = () => {
 		showModal = true;
 		document.body.style.overflow = 'hidden';
-	}
+	};
 
-	function closeModal() {
+	const closeModal = () => {
 		showModal = false;
 		document.body.style.overflow = '';
-	}
+	};
 </script>
 
 {#if showModal}
@@ -26,8 +30,8 @@
 
 <form>
 	<div class="first">
-		<input placeholder="name" />
-		<input placeholder="phone" />
+		<input placeholder="name" bind:value={nameValue} />
+		<input placeholder="phone" bind:value={phoneValue} />
 		<div class="button-wrapper">
 			<Button
 				color={'normal'}
