@@ -6,6 +6,7 @@
 	import Modal from '../../components/Modal.svelte';
 	import Select from '../../components/Select.svelte';
 	import { reservationList } from '../../stores/reservationStore';
+	import { tableList } from '../../stores/tableStore';
 
 	let showModal = false;
 
@@ -48,7 +49,19 @@
 
 		reservationList.update(list => [...list, pathData]);
 
-		goto('/');
+		tableList.update(tables =>
+			tables.map(table => {
+				if (reservationTables.some(selected => selected.id === table.id)) {
+					return { ...table, isUse: true };
+				} else {
+					return table;
+				}
+			})
+		);
+
+		setTimeout(() => {
+			goto('/');
+		}, 0);
 	};
 
 	const buttonText = (date: Date) => {

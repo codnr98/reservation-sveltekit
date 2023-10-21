@@ -2,6 +2,7 @@ export type Table = {
 	id: string;
 	number: number;
 	floor: number;
+	isUse: boolean;
 };
 
 export type Reservation = {

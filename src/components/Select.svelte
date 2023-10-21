@@ -65,6 +65,7 @@
 			{#each $tableList as table}
 				<div>
 					<input
+						disabled={table.isUse}
 						type="checkbox"
 						checked={isInclude(selectTable, table)}
 						id={table.id}
