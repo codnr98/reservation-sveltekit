@@ -58,16 +58,27 @@
 
 	const incrementDay = () => {
 		day++;
-		if (day > 31) {
+		if (day > dayOfMonth(month)) {
 			day = 1;
+			incrementMonth();
 		}
 	};
 
 	const decrementDay = () => {
 		day--;
-		if (day < 0) {
-			day = 31;
+		if (day < 1) {
+			day = dayOfMonth(month - 1);
+			decrementMonth();
 		}
+	};
+
+	const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+
+	const dayOfMonth = (month: number) => {
+		const currentYear = new Date().getFullYear();
+
+		if (month === 2) return isLeapYear(currentYear) ? 29 : 28;
+		return thirtyMonth.includes(month) ? 30 : 31;
 	};
 
 	const getMonthName = (monthNumber: number) => {
@@ -76,8 +87,6 @@
 
 		return date.toLocaleString('en-US', { month: 'long' });
 	};
-
-	const isLeapYear = (year: number) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 </script>
 
 <div class="modal">
@@ -91,7 +100,7 @@
 		<div class="indicator-wrapper">
 			<CalendarIcon />
 			<div class="indicator">
-				{`${padZero(month)}:${padZero(day)}`}
+				{`${getMonthName(month)} ${day}`}
 			</div>
 		</div>
 
