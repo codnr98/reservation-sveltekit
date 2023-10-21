@@ -9,7 +9,7 @@
 	import type { SaveDate } from '$lib/types';
 
 	export let closeModal: () => void;
-	export let saveDate: Date;
+	export let saveDate: Date = new Date();
 
 	const dispatch = createEventDispatcher();
 	const currentYear = new Date().getFullYear();
@@ -30,10 +30,8 @@
 
 		if (loadDate.hour > 12) {
 			hour = loadDate.hour - 12;
-			console.log(hour);
 			ampm = 'PM';
 		} else {
-			console.log(loadDate.hour);
 			hour = loadDate.hour;
 			ampm = 'AM';
 		}

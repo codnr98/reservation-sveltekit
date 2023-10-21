@@ -18,7 +18,7 @@ export const translator = (dateObject: Date, dataType: 'string' | 'value') => {
 
 	if (dataType === 'string') {
 		month = dateObject.toLocaleString('en', { month: 'long' });
-		if (today.toString == dateObject.toString) monthDate = 'Today';
+		if (today.getDate() == date && today.getMonth() == dateObject.getMonth()) monthDate = 'Today';
 		return `${monthDate}, ${formatAMPM(hour, minute)}`;
 	}
 

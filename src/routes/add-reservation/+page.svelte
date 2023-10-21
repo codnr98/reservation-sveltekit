@@ -1,35 +1,18 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { Table } from '$lib/types';
+	import { translator } from '$lib/utils/dateUtils';
 	import Button from '../../components/Button.svelte';
 	import Modal from '../../components/Modal.svelte';
 	import Select from '../../components/Select.svelte';
 	import { reservationList } from '../../stores/reservationStore';
-
-	const handleClickSubmitButton = () => {
-		const pathData = {
-			id: new Date().toString(),
-			name: nameValue,
-			phoneNum: phoneValue,
-			date: reservationDate,
-			guest: guests,
-			table: reservationTables,
-			note: note
-		};
-
-		reservationList.update(list => [...list, pathData]);
-
-		setTimeout(() => {
-			goto('/');
-		}, 0);
-	};
 
 	let showModal = false;
 
 	let nameValue = '';
 	let phoneValue = '';
 	let guests = 0;
-	let reservationDate = new Date();
+	let reservationDate: Date;
 	let reservationTables: Table[] = [];
 	let note = '';
 
@@ -51,6 +34,26 @@
 		reservationTables = [...e.detail.selectTable];
 		console.log(reservationTables);
 	};
+
+	const handleClickSubmitButton = () => {
+		const pathData = {
+			id: new Date().toString(),
+			name: nameValue,
+			phoneNum: phoneValue,
+			date: reservationDate,
+			guest: guests,
+			table: reservationTables,
+			note: note
+		};
+
+		reservationList.update(list => [...list, pathData]);
+
+		goto('/');
+	};
+
+	const buttonText = (date: Date) => {
+		return date ? (translator(date, 'string') as string) : 'Select Date';
+	};
 </script>
 
 {#if showModal}
@@ -66,7 +69,7 @@
 				color={'normal'}
 				sizeAlign={'outer'}
 				icon={'calendar'}
-				text={'Select Date'}
+				text={buttonText(reservationDate)}
 				onClick={openModal}
 			/>
 		</div>
