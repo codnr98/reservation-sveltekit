@@ -6,6 +6,7 @@
 	import Button from './Button.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { translator } from '$lib/utils';
+	import type { SaveDate } from '$lib/types';
 
 	export let closeModal: () => void;
 
@@ -22,12 +23,7 @@
 	let ampm = 'AM';
 
 	const loadDate = (saveDate: Date) => {
-		const x = translator(saveDate, 'value') as {
-			month: number;
-			date: number;
-			hour: number;
-			minute: number;
-		};
+		const x = translator(saveDate, 'value') as SaveDate;
 		if (x.month > 12) {
 			month = x.month - 12;
 			ampm = 'PM';

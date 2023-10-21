@@ -18,3 +18,10 @@ export type Table = {
 	number: number;
 	floor: number;
 };
+
+export type SaveDate = {
+	month: number;
+	date: number;
+	hour: number;
+	minute: number;
+};
