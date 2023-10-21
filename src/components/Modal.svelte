@@ -11,6 +11,8 @@
 	let minute = 0;
 	let ampm = 'AM';
 
+	let selectOption = 'time';
+
 	const incrementHour = () => {
 		if (hour === 12) toggleAMPM();
 		hour = hour === 12 ? 1 : hour + 1;
@@ -89,74 +91,87 @@
 	};
 </script>
 
-<div class="modal">
+<div class="modal-outside">
 	<div class="modal-content">
-		<div class="indicator-wrapper">
+		<div
+			class="indicator-wrapper"
+			on:click={() => {
+				selectOption = 'time';
+			}}
+		>
 			<AlarmIcon />
-			<div class="indicator">
+			<div class="{selectOption === 'time' ? 'active' : ''} indicator">
 				{`${padZero(hour)}:${padZero(minute)} ${ampm}`}
 			</div>
 		</div>
-		<div class="indicator-wrapper">
+		<div
+			class="indicator-wrapper"
+			on:click={() => {
+				selectOption = 'date';
+			}}
+		>
 			<CalendarIcon />
-			<div class="indicator">
+			<div class="{selectOption === 'date' ? 'active' : ''} indicator">
 				{`${getMonthName(month)} ${day}`}
 			</div>
 		</div>
 
-		<div class="dial">
-			<div class="dial-wrapper">
-				<button on:click={incrementHour}>
-					<ChevronUpIcon />
-				</button>
-				<p>{padZero(hour)}</p>
-				<button on:click={decrementHour}>
-					<ChevronDownIcon />
-				</button>
+		{#if selectOption === 'time'}
+			<div class="dial">
+				<div class="dial-wrapper">
+					<button on:click={incrementHour}>
+						<ChevronUpIcon />
+					</button>
+					<p>{padZero(hour)}</p>
+					<button on:click={decrementHour}>
+						<ChevronDownIcon />
+					</button>
+				</div>
+				<p>:</p>
+				<div class="dial-wrapper">
+					<button on:click={incrementMinute}>
+						<ChevronUpIcon />
+					</button>
+					<p>{padZero(minute)}</p>
+					<button on:click={decrementMinute}>
+						<ChevronDownIcon />
+					</button>
+				</div>
+				<p />
+				<div class="dial-wrapper">
+					<button on:click={toggleAMPM}>
+						<ChevronUpIcon />
+					</button>
+					<p>{ampm}</p>
+					<button on:click={toggleAMPM}>
+						<ChevronDownIcon />
+					</button>
+				</div>
 			</div>
-			<p>:</p>
-			<div class="dial-wrapper">
-				<button on:click={incrementMinute}>
-					<ChevronUpIcon />
-				</button>
-				<p>{padZero(minute)}</p>
-				<button on:click={decrementMinute}>
-					<ChevronDownIcon />
-				</button>
-			</div>
-			<p />
-			<div class="dial-wrapper">
-				<button on:click={toggleAMPM}>
-					<ChevronUpIcon />
-				</button>
-				<p>{ampm}</p>
-				<button on:click={toggleAMPM}>
-					<ChevronDownIcon />
-				</button>
-			</div>
-		</div>
+		{/if}
 
-		<div class="dial">
-			<div class="dial-wrapper">
-				<button on:click={incrementMonth}>
-					<ChevronUpIcon />
-				</button>
-				<p>{getMonthName(month)}</p>
-				<button on:click={decrementMonth}>
-					<ChevronDownIcon />
-				</button>
+		{#if selectOption === 'date'}
+			<div class="dial">
+				<div class="dial-wrapper">
+					<button on:click={incrementMonth}>
+						<ChevronUpIcon />
+					</button>
+					<p>{getMonthName(month)}</p>
+					<button on:click={decrementMonth}>
+						<ChevronDownIcon />
+					</button>
+				</div>
+				<div class="dial-wrapper">
+					<button on:click={incrementDay}>
+						<ChevronUpIcon />
+					</button>
+					<p>{padZero(day)}</p>
+					<button on:click={decrementDay}>
+						<ChevronDownIcon />
+					</button>
+				</div>
 			</div>
-			<div class="dial-wrapper">
-				<button on:click={incrementDay}>
-					<ChevronUpIcon />
-				</button>
-				<p>{padZero(day)}</p>
-				<button on:click={decrementDay}>
-					<ChevronDownIcon />
-				</button>
-			</div>
-		</div>
-
+		{/if}
 		<div class="button-container">
 			<div class="button-wrapper">
 				<Button icon={'trash'} color={'normal'} sizeAlign={'outer'} onClick={closeModal} />
@@ -169,7 +184,7 @@
 </div>
 
 <style>
-	.modal {
+	.modal-outside {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -190,6 +205,7 @@
 		align-items: center;
 		gap: 20px;
 		border-radius: 12px;
+		width: 30%;
 	}
 
 	.indicator {
@@ -242,5 +258,9 @@
 
 	.button-container > div:last-child {
 		flex: 3 1 0%;
+	}
+
+	.active {
+		border: 2px solid var(--orange500);
 	}
 </style>
