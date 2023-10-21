@@ -13,6 +13,14 @@
 	const handleClickPreviousButton = () => {
 		goto('/');
 	};
+
+	const countReservation = () => {
+		let count = 0;
+		$reservationList.forEach(ele => {
+			if (ele.isSeat) count++;
+		});
+		return count;
+	};
 </script>
 
 <header>
@@ -41,8 +49,8 @@
 	<div class="title">
 		{#if $page.url.pathname === '/'}
 			<h1>Reservation</h1>
-			{#if $reservationList.length}
-				<div>{$reservationList.length}</div>
+			{#if countReservation()}
+				<div>{countReservation()}</div>
 			{/if}
 		{:else}
 			<h1>New Reservation</h1>
