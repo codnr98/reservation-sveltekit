@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { clickOutside } from '$lib/utils';
 	import { tableList } from '../stores/tableStore';
+	import type { Table } from '$lib/types';
 
 	import DorpDownIcon from '../assets/arrow_drop_down.svelte';
-	import type { Table } from '$lib/types';
+	import Xmark from '../assets/xmark.svelte';
 
 	let isDrop = false;
 	let selectTable: Table[] = [];
@@ -24,7 +25,17 @@
 	<button class="select" on:click={handlerClickSelect}>
 		<ul class="select-item-container">
 			{#each selectTable as value, index}
-				<li class={index > 1 ? 'disable' : ''}>{`Table ${value.number} · Floor ${value.floor}`}</li>
+				<li class={index > 1 ? 'disable' : ''}>
+					{`Table ${value.number} · Floor ${value.floor}`}
+					<button
+						on:click={() => {
+							selectTable = selectTable.filter(ele => ele.id !== value.id);
+						}}
+						class="icon-wrapper"
+					>
+						<Xmark />
+					</button>
+				</li>
 			{:else}
 				<p>{'Select Table'}</p>
 			{/each}
@@ -45,7 +56,7 @@
 						id={table.id}
 						on:click={() => {
 							if (isInclude(selectTable, table)) {
-								selectTable = selectTable.filter(value => value.id !== table.id);
+								selectTable = selectTable.filter(ele => ele.id !== table.id);
 							} else {
 								selectTable = [...selectTable, table];
 							}
@@ -89,6 +100,22 @@
 		padding: 10px;
 		border-radius: 16px;
 		background-color: var(--background-secondary);
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+
+	.disable {
+		display: none !important;
+	}
+
+	.icon-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--background-primary3);
+		padding: 3px;
+		border-radius: 10px;
 	}
 
 	fieldset {
@@ -114,9 +141,5 @@
 
 	fieldset > div:last-child {
 		border-bottom: none;
-	}
-
-	.disable {
-		display: none;
 	}
 </style>
