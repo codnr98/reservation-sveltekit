@@ -7,6 +7,8 @@
 
 	let showModal = false;
 
+	let guests = 0;
+
 	function openModal() {
 		showModal = true;
 		document.body.style.overflow = 'hidden';
@@ -41,9 +43,27 @@
 		<div class="counter-container">
 			<p class="title">Guests</p>
 			<div class="counter">
-				<Button color={'normal'} text={''} icon={'minus'} sizeAlign={'inner'} onClick={() => {}} />
-				<p class="count">0</p>
-				<Button color={'normal'} text={''} icon={'plus'} sizeAlign={'inner'} onClick={() => {}} />
+				<Button
+					color={'normal'}
+					text={''}
+					icon={'minus'}
+					sizeAlign={'inner'}
+					onClick={() => {
+						if (guests > 0) guests--;
+					}}
+				/>
+
+				<p class="count">{guests}</p>
+
+				<Button
+					color={'normal'}
+					text={''}
+					icon={'plus'}
+					sizeAlign={'inner'}
+					onClick={() => {
+						guests++;
+					}}
+				/>
 			</div>
 		</div>
 		<Select />
