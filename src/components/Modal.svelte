@@ -185,6 +185,7 @@
 				</div>
 			</div>
 		{/if}
+
 		<div class="button-container">
 			<div class="button-wrapper">
 				<Button icon={'trash'} color={'normal'} sizeAlign={'outer'} onClick={closeModal} />

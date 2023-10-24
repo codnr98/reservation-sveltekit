@@ -22,8 +22,6 @@
 		],
 		note: '많이 주세요'
 	};
-
-	$: console.log($reservationList);
 </script>
 
 <content>
