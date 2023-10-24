@@ -42,7 +42,7 @@
 	};
 
 	const handleClickCard = () => {
-		goto(`/${props.id}`);
+		goto(`/edit/${props.id}`);
 	};
 </script>
 
