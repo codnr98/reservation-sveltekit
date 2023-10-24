@@ -46,7 +46,7 @@
 	};
 </script>
 
-<article on:click={handleClickCard} class={isSeat ? 'disable' : ''}>
+<button on:click={handleClickCard} class="{isSeat ? 'disable' : ''} article">
 	<div class="customer-info">
 		<h3>{props.name}</h3>
 		<div class="phone-num">
@@ -104,10 +104,10 @@
 			/>
 		</div>
 	</div>
-</article>
+</button>
 
 <style>
-	article {
+	.article {
 		display: flex;
 		flex-direction: column;
 		gap: 28px;
