@@ -10,7 +10,7 @@
 	export let icon: 'arrow-left' | 'add' | 'calendar' | 'minus' | 'plus' | 'trash' | null = null;
 	export let sizeAlign: 'inner' | 'outer';
 	export let color: 'orange' | 'normal' | 'text-orange';
-	export let onClick: () => void;
+	export let onClick: (e: MouseEvent) => void;
 	export let disable: boolean = false;
 </script>
 
