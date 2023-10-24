@@ -21,7 +21,6 @@
 		});
 		return count;
 	};
-	console.log($page.url, 1);
 </script>
 
 <header>

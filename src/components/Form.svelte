@@ -19,30 +19,10 @@
 	let note = '';
 
 	const reservationId = $page.params.id;
-	const loadData = () => {
-		let loadData = $reservationList.find(
-			reservation => reservation.id === reservationId
-		) as Reservation;
 
-		tableList.update(tables =>
-			tables.map(table => {
-				if (loadData.table.some(selected => selected.id === table.id)) {
-					return { ...table, isUse: false };
-				} else {
-					return table;
-				}
-			})
-		);
-
-		nameValue = loadData.name;
-		phoneValue = loadData.phoneNum;
-		guests = loadData.guest;
-		reservationDate = loadData.date;
-		reservationTables = loadData.table;
-		note = loadData.note;
+	const buttonText = (date: Date) => {
+		return date ? (translator(date, 'string') as string) : 'Select Date';
 	};
-
-	$: if ($page.params.id) loadData();
 
 	const openModal = () => {
 		showModal = true;
@@ -60,7 +40,6 @@
 
 	const handleSelectTable = (e: CustomEvent<{ selectTable: Table[] }>) => {
 		reservationTables = [...e.detail.selectTable];
-		console.log(reservationTables);
 	};
 
 	const handleClickSubmitButton = () => {
@@ -76,6 +55,7 @@
 		};
 
 		if (reservationId) {
+			// reservationId 가 있으면
 			reservationList.update(reservations => {
 				const index = reservations.findIndex(reservation => reservation.id === reservationId);
 				if (index !== -1) {
@@ -92,9 +72,11 @@
 
 		reservationList.update(list => [...list, pathData]);
 
+		// 선택 된 table 값의 isUse 를 true로 변환
 		tableList.update(tables =>
 			tables.map(table => {
 				if (reservationTables.some(selected => selected.id === table.id)) {
+					// 선탹 된 값의 id와 store에 있는 table.id 값을 비교하여 선택한 table의 isUse값을 true 로 변경하여 새로운 배열을 반환
 					return { ...table, isUse: true };
 				} else {
 					return table;
@@ -107,9 +89,33 @@
 		}, 0);
 	};
 
-	const buttonText = (date: Date) => {
-		return date ? (translator(date, 'string') as string) : 'Select Date';
+	const loadData = () => {
+		const loadData = $reservationList.find(
+			reservation => reservation.id === reservationId // url의 id와 같은 reservation 이 있으면 해당 객체를 할당한다.
+		) as Reservation;
+
+		tableList.update(tables =>
+			tables.map(table => {
+				// 수정할 객체에서 table 값이 있으면 store에서 순회 하여 isUse 값을 false로 변경한다.
+				if (loadData.table.some(selected => selected.id === table.id)) {
+					return { ...table, isUse: false };
+				} else {
+					return table;
+				}
+			})
+		);
+
+		// 수정할 값들을 재할당한다.
+		nameValue = loadData.name;
+		phoneValue = loadData.phoneNum;
+		guests = loadData.guest;
+		reservationDate = loadData.date;
+		reservationTables = loadData.table;
+		note = loadData.note;
 	};
+
+	// 만약 url에 id값이 있는 경우 loadDate()를 호출한다.
+	$: if ($page.params.id) loadData();
 </script>
 
 {#if showModal}
