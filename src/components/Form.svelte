@@ -54,6 +54,18 @@
 			isSeat: false
 		};
 
+		// 선택 된 table 값의 isUse 를 true로 변환
+		tableList.update(tables =>
+			tables.map(table => {
+				if (reservationTables.some(selected => selected.id === table.id)) {
+					// 선탹 된 값의 id와 store에 있는 table.id 값을 비교하여 선택한 table의 isUse값을 true 로 변경하여 새로운 배열을 반환
+					return { ...table, isUse: true };
+				} else {
+					return table;
+				}
+			})
+		);
+
 		if (reservationId) {
 			// reservationId 가 있으면
 			reservationList.update(reservations => {
@@ -72,17 +84,7 @@
 
 		reservationList.update(list => [...list, pathData]);
 
-		// 선택 된 table 값의 isUse 를 true로 변환
-		tableList.update(tables =>
-			tables.map(table => {
-				if (reservationTables.some(selected => selected.id === table.id)) {
-					// 선탹 된 값의 id와 store에 있는 table.id 값을 비교하여 선택한 table의 isUse값을 true 로 변경하여 새로운 배열을 반환
-					return { ...table, isUse: true };
-				} else {
-					return table;
-				}
-			})
-		);
+		console.log($tableList);
 
 		setTimeout(() => {
 			goto('/');
