@@ -9,16 +9,17 @@ export const formatAMPM = (hours: number, minutes: number) => {
 
 export const translator = (dateObject: Date, dataType: 'string' | 'value') => {
 	const today = new Date();
-	let month: number | string = '';
+	let month: number | string;
 	const date = dateObject.getDate();
 	const hour = dateObject.getHours();
 	const minute = dateObject.getMinutes();
 
-	let monthDate = `${month} ${date}`;
-
 	if (dataType === 'string') {
 		month = dateObject.toLocaleString('en', { month: 'long' });
+		let monthDate = `${month} ${date}`;
+
 		if (today.getDate() == date && today.getMonth() == dateObject.getMonth()) monthDate = 'Today';
+
 		return `${monthDate}, ${formatAMPM(hour, minute)}`;
 	}
 
